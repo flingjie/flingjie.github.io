@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Generator in Python</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/generator-in-python.html" rel="bookmark"
+           title="Permalink to Generator in Python">Generator in Python</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-14T11:52:54+08:00">
+                Published: 五 14 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/python.html">Python</a>.</p>
+
+</footer><!-- /.post-info -->      <p>生成器是可以当作iterator使用的特殊函数。它有以下优点： <br />
+1. 惰性求值； <br />
+2. 在处理大的列表时不需要一次性加载全部数据，可以减小内存使用； <br />
+除非特殊的原因，应该在代码中使用生成器。</p>
+<p><strong>生成器(generator) vs 函数(function)</strong> <br />
+生成器和函数的主要区别在于函数return a value, 生成器yield a value同时
+记录以便在下次调用时从上次的状态下恢复执行。</p>
+<p><strong>生成器(generator) vs 迭代器(iterator)</strong> <br />
+ * 迭代器是一个更一般的概念，它是一个有next方法和返回self的__iter__方
+法的类。 <br />
+ * 每个生成器是一个迭代器，但迭代器不一定是生成器，生成器是有记录上次
+ 执行状态的迭代器。从这点上看生成器有点像闭包，只是它记录的不是数据
+ 的状态，记录的是执行过程中的状态。</p>
+<p><strong>生成器(generator) vs 续延(coninuations)</strong>
+与生成器相比，续延更加灵活，续延允许你调用不同状态的执行过程，而不像生
+成器这样直接返回。</p>
+<p><strong>创建生成器</strong> <br />
+在python可以使用以下方式创建生成器： <br />
+1.使用yield</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">Generator</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+            <span class="k">yield</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+</pre></div>
+
+
+<p>2.使用generator expression</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">Generator</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</pre></div>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

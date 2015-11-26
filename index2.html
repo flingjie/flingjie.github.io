@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Jie's Blog</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+                <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="9">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/metaprogrammingblock.html" rel="bookmark"
+                           title="Permalink to Metaprogramming(Block)">Metaprogramming(Block)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-03T17:06:28+08:00">
+                Published: 六 03 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>块继承自“函数式编程语言(functional programming languages)”的世界。
+<br>
+<img alt="blocks" src="/images/blocks.png" />
+<br>
+* 注1: 在一个方法中，可以向Ruby询问当前的方法调用是否包含块。这可以通
+  过Kernel#block_given?()方法来做到。</p>
+<ul>
+<li>
+<p>注2: 如果在一个扁平作用域中定义了多个方法，这这些方法可以用一个作用
+  域们进行保护，并共享绑定，这种技术称为共享作用域。</p>
+</li>
+<li>
+<p>注3: 传递给instance_eval()方法的块称为一个上下文探针，因为它就像是一
+  个深入到对象中的代码片段，对其操作。</p>
+</li>
+</ul>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">C</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vi">@x</span><span class="o">=</span><span class="s2">&quot;a private instance variable&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">obj</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">new</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">instance_eval</span><span class="p">(</span><span class="vi">@x</span><span class="p">)</span> <span class="c1">#=&gt;&quot;a private instance variable&quot;</span>
+</pre></div>
+
+
+<ul>
+<li>注4: 有时，你会创建一个对象，仅仅是为了在其中执行块 ...</li></ul>
+                <a class="readmore" href="/metaprogrammingblock.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/metaprogrammingmethods.html" rel="bookmark"
+                           title="Permalink to Metaprogramming(Methods)">Metaprogramming(Methods)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-03T16:44:19+08:00">
+                Published: 六 03 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>Ruby是动态语言，没有静态类型检查，同时也提供了很多java等静态语言无法提
+供的编程技巧。本章主要专注于消除重复代码的技巧，通过用两种不同的方式对一
+段代码的重构来展示Ruby的强大功能，涉及的知识点比较少。
+<br>
+<img alt="methods" src="/images/methods.png" />
+<br>
+* 注1: method_missing()是Kernel中的一个实例方法，当Ruby找不到调用的方
+  法时，它最后就会调用这个名为method_missing()的方法。</p>
+<ul>
+<li>注2: 移除一个对象中的所有方法，以便把它们转换成幽灵方法。</li>
+</ul>
+<hr />
+<p><strong>重构例子</strong></p>
+<div class="highlight"><pre><span class="c1"># 原始代码</span>
+<span class="k">class</span> <span class="nc">Computer</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">computer_id</span><span class="p">,</span> <span class="n">data_source</span><span class="p">)</span>
+    <span class="vi">@id</span> <span class="o">=</span> <span class="n">computer_id</span>
+    <span class="vi">@data_source</span> <span class="o">=</span> <span class="n">data_source</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">mouse</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="vi">@data_source</span><span class="o">.</span><span class="n">get_mouse_info</span><span class="p">(</span><span class="vi">@id</span><span class="p">)</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="vi">@data_source</span><span class="o">.</span><span class="n">get_mouse_price</span><span class="p">(</span><span class="vi">@id</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;Mouse: </span><span class="si">#{</span><span class="n">info</span><span class="si">}</span><span class="s2"> ($</span><span class="si">#{</span><span class="n">price</span><span class="si">}</span><span class="s2">)&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;* </span><span class="si">#{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">price</span> <span class="o">&gt;=</span> <span class="mi">100 ...</span></pre></div>
+                <a class="readmore" href="/metaprogrammingmethods.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/metaprogrammingobjectmodel.html" rel="bookmark"
+                           title="Permalink to Metaprogramming(ObjectModel)">Metaprogramming(ObjectModel)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-02T20:44:57+08:00">
+                Published: 五 02 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>在Ruby程序中，除了对象之外，还有类、模块以及实例变量这些语言构件。这
+些语言构件存在于其中的系统称为<strong>对象模型</strong>。在对象模型中，你可以找到诸
+如"这个方法来自哪个类"和"当我包含这个模块是会发生什么"此类问题的答案。
+<br>
+<img alt="ObjectModel" src="/images/ObjectModel.png" />
+<br>
+* 注1: class关键字更像是一个作用域操作符而不是类型声明语句，它的确可以
+  创建一个还不存在的类，不过也可以把这看成是一个副作用。对于class关键
+  字，其核心任务是把你带到类的上下文中，让你可以在其中定义方法。</p>
+<ul>
+<li>
+<p>注2: 修改已有类的特性时，由于粗心导致bug，像这种鲁莽的修改方式被称为
+  猴子补丁。不过，如果是正确的运行打开类这种技术，猴子补丁也可以表示为
+  一个褒义词，会很有用。</p>
+</li>
+<li>
+<p>注3: 对象是一组实例变量外加一个指向其类的引用。对象的方法并不存在于对象本身，而是存在于对象的类中。在类中，这些方法被称为类的实例方法。
+类是一个对象（Class类的一个实例）外加一组实例方法和一个对其超类的引用。
+值得注意的是，实例变量存放在对象中，而方法存放在类中，比如</p>
+</li>
+</ul>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">MyClass</span>
+  <span class="k">def</span> <span class="nf">my_method ...</span></pre></div>
+                <a class="readmore" href="/metaprogrammingobjectmodel.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/metaprogrammingtutorial.html" rel="bookmark"
+                           title="Permalink to Metaprogramming(Tutorial)">Metaprogramming(Tutorial)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-04-29T21:56:38+08:00">
+                Published: 二 29 四月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>元编程(Metaprogramming)，简单来说，就是写出编写代码的代码。正式的定义为：编写在运行时操纵语言构件的代码。
+Ruby是一门对元编程支持很强大的语言(只是比lisp弱一点)，而且，元编程
+也是通向Ruby的高级编程之路。可以说，除非掌握了元编程否则不能算是真正掌
+握了Ruby。
+下图简要总结了<Ruby元编程>的基本内容，经验有限，不足之处请多指正。
+<br>
+<img alt="RubyMetaprogramming" src="/images/RubyMetaprogramming.png" />
+<br> 
+就如蜘蛛侠大叔曾经说的，能力越大，责任越大。元编程赋予了你强大的能力，同时也意味着你需要肩负更大的责任。</p>
+                <a class="readmore" href="/metaprogrammingtutorial.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/a-algorithm.html" rel="bookmark"
+                           title="Permalink to A* Algorithm">A* Algorithm</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-04-22T18:10:18+08:00">
+                Published: 二 22 四月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/algorithm.html">Algorithm</a>.</p>
+
+</footer><!-- /.post-info -->                <p>A*算法是一种经典的启发式搜索算法,公式表示为：f(n)=g(n)+h(n)，其中f(n)
+是从初始点到目标点的估价函数，g(n)是从初始点到节点n的代价，h(n)是从节
+点n到目标节点的估计代价，保证找到最短路径关键在于估价函数h(n)的选取。  <br />
+一、几个相关知识：  <br />
+<strong>启发式搜索</strong>：启发式搜索就是在状态空间中的搜索对每一个搜索的位置进行评估，得到最好的位置，再从这个位置进行搜索直到目标。这样可以省略大量无畏的搜索路径，提到了效率。在启发式搜索中，对位置的估价是十分重要的。采用了不同的估价可以有不同的效果。</p>
+<p><strong>估价函数</strong>：从当前节点移动到目标节点的预估费用；这个估计就是启发式的。在寻路问题和迷宫问题中，我们通常用曼哈顿（manhattan）估价函数。</p>
+<p><strong>A*算法的特点</strong>：A*算法在理论上是时间最优的，但是也有缺点：它的空间增长是指数级别的。</p>
+<p><strong>A*算法与BFS</strong>：可以这样说，BFS是A ...</p>
+                <a class="readmore" href="/a-algorithm.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/configure-emacs-for-clojure.html" rel="bookmark"
+                           title="Permalink to Configure Emacs for clojure">Configure Emacs for clojure</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-29T10:39:00+08:00">
+                Published: 六 29 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/emacs.html">emacs</a>.</p>
+
+</footer><!-- /.post-info -->                <p>1.<strong>使用环境</strong>：
+ubuntu12.04 + emacs24 + leiningen2.3.4</p>
+<p>2.<strong>配置emacs</strong> <br />
+  a.添加package地址，在<code>~/.emacs.d/init.el</code>中加入：   </p>
+<div class="highlight"><pre><span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">package</span><span class="p">)</span>
+<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">list</span> <span class="err">&#39;</span><span class="n">package</span><span class="o">-</span><span class="n">archives</span>
+             <span class="err">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="p">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="n">package</span><span class="o">-</span><span class="n">initialize</span><span class="p">)</span>
+</pre></div>
+
+
+<p>b.安装相关插件，在<code>~/.emacs.d/init.el</code>中加入：</p>
+<div class="highlight"><pre><span class="p">(</span><span class="n">defvar</span> <span class="n">my</span><span class="o">-</span><span class="n">packages</span> <span class="err">&#39;</span><span class="p">(</span><span class="n">starter</span><span class="o">-</span><span class="n">kit</span>
+                      <span class="n">starter</span><span class="o">-</span><span class="n">kit</span><span class="o">-</span><span class="n">lisp</span>
+                      <span class="n">starter</span><span class="o">-</span><span class="n">kit ...</span></pre></div>
+                <a class="readmore" href="/configure-emacs-for-clojure.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/recursive-clojure.html" rel="bookmark"
+                           title="Permalink to Recursive Clojure">Recursive Clojure</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-18T21:23:52+08:00">
+                Published: 二 18 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/clojure.html">Clojure</a>.</p>
+
+</footer><!-- /.post-info -->                <p>一般函数可以通过调用自身来实现递归的效果，但这种方式会消耗栈有导致栈
+溢出。比如下面这个计算阶乘的例子：</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">recur-fac</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="mi">1</span> <span class="nv">n</span><span class="p">)</span>
+        <span class="mi">1</span>
+        <span class="p">(</span><span class="nb">* </span><span class="nv">n</span> <span class="p">(</span><span class="nf">recur-fac</span> <span class="p">(</span><span class="nb">dec </span><span class="nv">n</span><span class="p">)))))</span>
+</pre></div>
+
+
+<p>通常，可以改写成尾递归的方式来避免消耗栈导致栈溢出，改写如下：</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">recur-fac</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">letfn</span> <span class="p">[(</span><span class="nf">fac</span> <span class="p">[</span><span class="nv">c</span> <span class="nv">r</span><span class="p">]</span>
+                <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="mi">0</span> <span class="nv">c</span><span class="p">)</span>
+                    <span class="nv">r</span>
+                    <span class="p">(</span><span class="nf">fac</span> <span class="p">(</span><span class="nb">dec </span><span class="nv">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">* </span><span class="nv">c</span> <span class="nv">r</span><span class="p">))))]</span>
+    <span class="p">(</span><span class="nf">fac</span> <span class="nv">n</span> <span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>上面的写法使用了尾递归，在common lisp的语言中可以达到尾递归优化(TCO)，
+问题是clojure是基于JVM，无法支持完全的TCO，这主要是Java的安全模型决定
+的。还好Clojue也支持同一个函数体直接调用自身的TCO，只是要使用clojure的
+特殊形式，即使用recur关键字。改写如下 ...</p>
+                <a class="readmore" href="/recursive-clojure.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/description-in-python.html" rel="bookmark"
+                           title="Permalink to Description in Python">Description in Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-15T16:27:32+08:00">
+                Published: 六 15 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/python.html">Python</a>.</p>
+
+</footer><!-- /.post-info -->                <p>在python中一个描述器就是定义下面的方法中一个或多个的一个对象：</p>
+<div class="highlight"><pre><span class="n">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span><span class="n">t</span>
+<span class="n">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="n">__delete__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
+</pre></div>
+
+
+<p>如果一个对象同时定义了<code>__get__()</code>和<code>__set__()</code>，它叫做资料描述器。只定义了<code>__get__()</code>的描述器叫做非资料描述器(一般用于方法)。
+资料描述器和非资料描述器的区别在于：相对于实例字典的优先级。如果实例字典中有与资料描述器同名的属性，优先使用资料描述器中的；如果实例字典中有与非资料描述器中同名的属性，优先使用实例字典中的。即优先级 资料描述器 &gt; 实例字典 &gt; 非资料描述器。 <br />
+要想写一个只读的资料描述器，只需同时定义<code>__get__()</code>和<code>__set__()</code>并在<code>__set__()</code>中抛出一个<code>AttributeError</code>。</p>
+<p><strong>描述器的调用</strong> <br />
+描述器可以直接这么调用：<code>descriptor.__get__(obj)</code>，不过一般都是用来拦截对实例属性的访问。 <br />
+描述器的调用规则如下：   </p>
+<ul>
+<li><code>__get__(self ...</code></li></ul>
+                <a class="readmore" href="/description-in-python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/context-manager-in-python.html" rel="bookmark"
+                           title="Permalink to Context manager in Python">Context manager in Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-14T17:13:46+08:00">
+                Published: 五 14 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/python.html">Python</a>.</p>
+
+</footer><!-- /.post-info -->                <p>上下文管理器(context manager)是Python2.5开始支持的一种语法，用于处理指
+定代码块进入和退出时的操作。一般使用with语法，也可以直接调用相应的方法。</p>
+<p><strong>with语句</strong> <br />
+with语句是用来简化“try/finally”语句的，通常用于处理共享资源的获取和
+释放，比如文件、数据库和线程资源。它的用法如下：</p>
+<div class="highlight"><pre><span class="k">with</span> <span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span><span class="p">:</span>
+    <span class="n">BLOCK</span>
+</pre></div>
+
+
+<p>其相当于进行了如下操作：</p>
+<div class="highlight"><pre><span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span>
+<span class="n">VAR</span><span class="o">.</span><span class="n">__enter__</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">BLOCK</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">VAR</span><span class="o">.</span><span class="n">__exit__</span><span class="p">()</span>
+</pre></div>
+
+
+<p>例子如下：</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
+<span class="k">class</span> <span class="nc">demo</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">label</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
+
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start ...</span></pre></div>
+                <a class="readmore" href="/context-manager-in-python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/decroator-in-python.html" rel="bookmark"
+                           title="Permalink to Decroator in Python">Decroator in Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-14T15:00:56+08:00">
+                Published: 五 14 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/python.html">Python</a>.</p>
+
+</footer><!-- /.post-info -->                <p>装饰器的作用是在原有对象的基础上添加额外功能。python中可以将函数作为参
+数，进行装饰，返回经过修饰过的函数，比如：</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+        <span class="k">print</span> <span class="s">&quot;*** wrapper ***&quot;</span>
+        <span class="n">fn</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&quot;*** wrapper ***&quot;</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="k">def</span> <span class="nf">origin_fn</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&quot;--- origin ---&quot;</span>
+
+<span class="n">decorated_fn</span> <span class="o">=</span> <span class="n">decorator</span><span class="p">(</span><span class="n">origin_fn</span><span class="p">)</span>
+
+<span class="n">decorated_fn</span><span class="p">()</span>
+</pre></div>
+
+
+<p>python可以使用语法糖@来达到相同的作用，例子如下：</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">makebold</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s">&quot;&lt;b&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;&lt;/b&gt;&quot;</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="k">def</span> <span class="nf">makeitalic</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s">&quot;&lt;i&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;&lt;/i&gt;&quot;</span>
+    <span class="k">return ...</span></pre></div>
+                <a class="readmore" href="/decroator-in-python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+<p class="paginator">
+        <a href="/index.html">&laquo;</a>
+    Page 2 / 3
+        <a href="/index3.html">&raquo;</a>
+</p>
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Jie's Blog - emacs</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/configure-emacs-for-clojure.html">Configure Emacs for clojure</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-03-29T10:39:00+08:00">
+                Published: 六 29 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/emacs.html">emacs</a>.</p>
+
+</footer><!-- /.post-info --><p>1.<strong>使用环境</strong>：
+ubuntu12.04 + emacs24 + leiningen2.3.4</p>
+<p>2.<strong>配置emacs</strong> <br />
+  a.添加package地址，在<code>~/.emacs.d/init.el</code>中加入：   </p>
+<div class="highlight"><pre><span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">package</span><span class="p">)</span>
+<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">list</span> <span class="err">&#39;</span><span class="n">package</span><span class="o">-</span><span class="n">archives</span>
+             <span class="err">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="p">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="n">package</span><span class="o">-</span><span class="n">initialize</span><span class="p">)</span>
+</pre></div>
+
+
+<p>b.安装相关插件，在<code>~/.emacs.d/init.el</code>中加入：</p>
+<div class="highlight"><pre><span class="p">(</span><span class="n">defvar</span> <span class="n">my</span><span class="o">-</span><span class="n">packages</span> <span class="err">&#39;</span><span class="p">(</span><span class="n">starter</span><span class="o">-</span><span class="n">kit</span>
+                      <span class="n">starter</span><span class="o">-</span><span class="n">kit</span><span class="o">-</span><span class="n">lisp</span>
+                      <span class="n">starter</span><span class="o">-</span><span class="n">kit</span><span class="o">-</span><span class="n">bindings</span>
+                      <span class="n">starter</span><span class="o">-</span><span class="n">kit</span><span class="o">-</span><span class="n">eshell</span>
+                      <span class="n">clojure</span><span class="o">-</span><span class="n">mode</span>
+                      <span class="n">clojure</span><span class="o">-</span><span class="n">test</span><span class="o">-</span><span class="n">mode</span>
+                      <span class="n">cider</span><span class="p">))</span>
+
+<span class="p">(</span><span class="n">dolist</span> <span class="p">(</span><span class="n">p</span> <span class="n">my</span><span class="o">-</span><span class="n">packages</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">when</span> <span class="p">(</span><span class="n">not</span> <span class="p">(</span><span class="n">package</span><span class="o">-</span><span class="n">installed</span><span class="o">-</span><span class="n">p</span> <span class="n">p</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">package</span><span class="o">-</span><span class="n">install</span> <span class="n">p</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>3.<strong>编辑相关操作</strong> <br />
+a.文件、窗口操作</p>
+<div class="highlight"><pre>C-x C-f    打开文件
+C-x C-s    保存文件
+C-x b      切换buffer
+C-x k      关闭当前buffer
+C-x o      切换到下一buffer
+C-x 0      隐藏当前buffer
+C-x 1      隐藏其他buffer
+C-x 2      垂直分割窗口
+C-x 3      水平分割窗口
+</pre></div>
+
+
+<p>b.移动操作</p>
+<div class="highlight"><pre><span class="n">C</span><span class="o">-</span><span class="n">a</span>    <span class="err">移动到行头</span>
+<span class="n">C</span><span class="o">-</span><span class="n">e</span>    <span class="err">移动到行尾</span>
+<span class="n">C</span><span class="o">-</span><span class="n">n</span>    <span class="err">移动到下一行</span>
+<span class="n">C</span><span class="o">-</span><span class="n">p</span>    <span class="err">移动到上一行</span>
+<span class="n">C</span><span class="o">-</span><span class="n">b</span>    <span class="err">向后移动一个字符</span>
+<span class="n">C</span><span class="o">-</span><span class="n">f</span>    <span class="err">向前移动一个字符</span>
+<span class="n">M</span><span class="o">-</span><span class="n">f</span>    <span class="err">向前移动一个单词</span>
+<span class="n">M</span><span class="o">-</span><span class="n">b</span>    <span class="err">向后移动一个单词</span>
+<span class="n">C</span><span class="o">-</span><span class="n">v</span>    <span class="err">向下翻页</span>
+<span class="n">M</span><span class="o">-</span><span class="n">v</span>    <span class="err">向上翻页</span>
+<span class="n">M</span><span class="o">-&lt;</span>    <span class="err">移动到</span><span class="n">buffer</span><span class="err">开头</span>
+<span class="n">M</span><span class="o">-&gt;</span>    <span class="err">移动到</span><span class="n">buffer</span><span class="err">末尾</span>
+<span class="n">C</span><span class="o">-</span><span class="n">M</span><span class="o">-</span><span class="n">f</span>  <span class="err">移动到后一个括号</span>
+<span class="n">C</span><span class="o">-</span><span class="n">M</span><span class="o">-</span><span class="n">f</span>  <span class="err">移动到前一个括号</span>
+</pre></div>
+
+
+<p>c.编辑操作</p>
+<div class="highlight"><pre><span class="n">C</span><span class="o">-</span><span class="n">d</span>        <span class="err">删除一个字符</span>
+<span class="n">M</span><span class="o">-</span><span class="n">d</span>        <span class="err">删除一个单词</span>
+<span class="n">C</span><span class="o">-</span><span class="n">k</span>        <span class="err">删除一行</span>
+<span class="n">C</span><span class="o">-</span><span class="n">w</span>        <span class="err">删除选中区域</span>
+<span class="n">M</span><span class="o">-</span><span class="n">w</span>        <span class="err">复制选中区域</span>
+<span class="n">C</span><span class="o">-</span><span class="n">y</span>        <span class="err">粘帖</span>
+<span class="n">C</span><span class="o">-</span><span class="n">j</span>        <span class="err">换行</span>
+
+<span class="n">C</span><span class="o">-</span><span class="n">M</span><span class="o">-</span><span class="n">Space</span>  <span class="err">选中光标所在的</span><span class="n">S</span><span class="err">表达式</span>
+<span class="n">C</span><span class="o">-</span><span class="n">M</span><span class="o">-</span><span class="n">t</span>      <span class="err">交换连个</span><span class="n">S</span><span class="err">表达式位置</span>
+<span class="n">M</span><span class="o">-</span><span class="mi">1</span> <span class="p">(</span>      <span class="err">在当前</span><span class="n">S</span><span class="err">表达式外添加一对括号</span>
+<span class="n">M</span><span class="o">-</span><span class="n">s</span>        <span class="err">删除当前</span><span class="n">S</span><span class="err">表达式外的一对括号</span>
+<span class="n">M</span><span class="o">-</span><span class="n">r</span>        <span class="err">删除当前</span><span class="n">S</span><span class="err">表达式外的一对括号</span><span class="p">(</span><span class="err">包括内容</span><span class="p">)</span>
+<span class="n">C</span><span class="o">-</span><span class="p">)</span>        <span class="err">将后面的括号向后移动一个元素</span>
+           <span class="p">(</span><span class="n">a</span> <span class="n">b</span> <span class="p">(</span><span class="n">c</span> <span class="n">d</span><span class="p">)</span> <span class="n">e</span> <span class="n">f</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="n">b</span> <span class="p">(</span><span class="n">c</span> <span class="n">d</span> <span class="n">e</span><span class="p">)</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">C</span><span class="o">-</span><span class="p">}</span>        <span class="err">将后面的括号向前移动一个元素</span>
+           <span class="p">(</span><span class="n">a</span> <span class="n">b</span> <span class="p">(</span><span class="n">c</span> <span class="n">d</span><span class="p">)</span> <span class="n">e</span> <span class="n">f</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="n">b</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">C</span><span class="o">-</span><span class="p">(</span>        <span class="err">将前面的括号向前移动一个元素</span>
+<span class="n">C</span><span class="o">-</span><span class="p">{</span>        <span class="err">将前面的括号向后移动一个元素</span>
+<span class="n">C</span><span class="o">-</span><span class="n">M</span><span class="o">-</span><span class="n">q</span>      <span class="err">代码对齐</span>
+</pre></div>
+
+
+<p>d.帮助操作</p>
+<div class="highlight"><pre><span class="n">C</span><span class="o">-</span><span class="n">h</span> <span class="n">b</span>    <span class="err">查看当前的</span><span class="n">key</span><span class="err">绑定</span>
+<span class="n">C</span><span class="o">-</span><span class="n">h</span> <span class="n">m</span>    <span class="err">查看当前的编辑模式</span>
+<span class="n">C</span><span class="o">-</span><span class="n">h</span> <span class="n">a</span>    <span class="err">查找一个关键词的相关帮助</span>
+<span class="n">C</span><span class="o">-</span><span class="n">h</span> <span class="n">k</span>    <span class="err">查看一个</span><span class="n">key</span><span class="err">的绑定</span>
+</pre></div>
+
+
+<p>4.<strong>编译相关操作</strong></p>
+<div class="highlight"><pre><span class="n">C</span><span class="o">-</span><span class="n">c</span> <span class="n">M</span><span class="o">-</span><span class="n">j</span>    <span class="n">cider</span><span class="o">-</span><span class="n">jack</span><span class="o">-</span><span class="n">in</span><span class="p">,</span><span class="err">启动</span><span class="n">nREPL</span>
+<span class="n">C</span><span class="o">-</span><span class="n">c</span> <span class="n">C</span><span class="o">-</span><span class="n">e</span>    <span class="err">执行</span><span class="n">s</span><span class="err">表达式</span>
+<span class="n">C</span><span class="o">-</span><span class="n">c</span> <span class="n">C</span><span class="o">-</span><span class="n">r</span>    <span class="err">执行当前选中区</span>
+<span class="n">C</span><span class="o">-</span><span class="n">c</span> <span class="n">C</span><span class="o">-</span><span class="n">z</span>    <span class="err">运行</span><span class="n">lisp</span><span class="err">进程</span>
+</pre></div>
+
+
+<p>5.<strong>宏操作</strong></p>
+<div class="highlight"><pre><span class="n">C</span><span class="o">-</span><span class="n">x</span> <span class="p">(</span>   <span class="p">;;</span><span class="err">开始录制宏</span>
+<span class="p">...</span>     <span class="p">;;</span><span class="err">输入操作</span>
+<span class="n">C</span><span class="o">-</span><span class="n">x</span> <span class="p">)</span>   <span class="p">;;</span><span class="err">结束录制</span>
+<span class="n">C</span><span class="o">-</span><span class="n">x</span> <span class="n">e</span>   <span class="p">;;</span><span class="err">执行宏</span>
+</pre></div>                </article>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

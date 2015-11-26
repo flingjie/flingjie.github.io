@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Jie's Blog - Ruby</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/metaprogrammingcode-generator.html">Metaprogramming(code generator)</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-05-03T19:23:53+08:00">
+                Published: 六 03 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info --><p>根本没有什么元编程，只有编程！？
+<br>
+<img alt="CodeWriter" src="/images/CodeWriter.png" />
+<br></p>
+<ul>
+<li>
+<p>注1: 由于代码字符串和块非常相似，因此，在很多情况下，可以选择使用任
+  意一种。但是，一般情况下，只要能用块就尽量用块。</p>
+</li>
+<li>
+<p>注2: 使一个模块可以通过钩子方法扩展它的包含者。</p>
+</li>
+</ul>
+<div class="highlight"><pre><span class="k">module</span> <span class="nn">M</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+    <span class="n">base</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="no">ClassMethods</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">module</span> <span class="nn">ClassMethods</span>
+    <span class="k">def</span> <span class="nf">my_method</span>
+      <span class="s1">&#39;a class method&#39;</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">C</span>
+  <span class="kp">include</span> <span class="n">M</span>
+<span class="k">end</span>
+
+<span class="n">C</span><span class="o">.</span><span class="n">my_method</span>   <span class="c1"># =&gt;  &quot;a class method&quot;</span>
+</pre></div>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/meta-programmingclass.html" rel="bookmark"
+                           title="Permalink to Meta programming(Class)">Meta programming(Class)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-03T17:51:04+08:00">
+                Published: 六 03 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>在Ruby中，使用class定义类时，实际上是在运行代码，这与java之类的静态语
+言有很大的差别。  <br />
+另外，类只是一个增强的模块，因此，任何适用于类的东西也
+适用于模块。
+<br>
+<img alt="Object Definitions" src="/images/ObjectDefinitions.png" />
+<br>
+ * 注1:在类(或模块)定义时，类本身充当了当前对象self的角色。</p>
+<div class="highlight"><pre><span class="n">result</span> <span class="o">=</span> <span class="k">class</span> <span class="nc">MyClass</span>
+  <span class="nb">self</span>
+<span class="k">end</span>
+
+<span class="n">result</span>     <span class="c1"># =&gt;  MyClass</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>注2:Ruby中总是存在一个当前对象self，与此类似，也总是存在一个当前类
+   （或模块）。每当通过class关键字来打开一个类时，这个类就成为当前类，
+   但是使用class关键字需要一个类的名字。
+   如果只有一个类的引用，需要用class_eval()方法打开这个类。</p>
+</li>
+<li>
+<p>注3：类实例变量仅仅是属于Class类对象的普通实例变量。它仅仅可以被类
+   本身所访问，而不能被类的实例或之类所访问。</p>
+</li>
+<li>
+<p>注4：类方法的实质，它们只是一个类的单件方法。</p>
+</li>
+<li>
+<p>注5: 在类定义中使用一个类方法。</p>
+</li>
+<li>
+<p>注6: eigenclass是一个对象特有的隐藏类，它是单件方法存在的地方。Ruby中可以使用如下语法进入eigenclass的作用域。</p>
+</li>
+</ul>
+<div class="highlight"><pre><span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="n">an_object</span> 
+  <span class="c1"># do ...</span></pre></div>
+                <a class="readmore" href="/meta-programmingclass.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/metaprogrammingblock.html" rel="bookmark"
+                           title="Permalink to Metaprogramming(Block)">Metaprogramming(Block)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-03T17:06:28+08:00">
+                Published: 六 03 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>块继承自“函数式编程语言(functional programming languages)”的世界。
+<br>
+<img alt="blocks" src="/images/blocks.png" />
+<br>
+* 注1: 在一个方法中，可以向Ruby询问当前的方法调用是否包含块。这可以通
+  过Kernel#block_given?()方法来做到。</p>
+<ul>
+<li>
+<p>注2: 如果在一个扁平作用域中定义了多个方法，这这些方法可以用一个作用
+  域们进行保护，并共享绑定，这种技术称为共享作用域。</p>
+</li>
+<li>
+<p>注3: 传递给instance_eval()方法的块称为一个上下文探针，因为它就像是一
+  个深入到对象中的代码片段，对其操作。</p>
+</li>
+</ul>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">C</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vi">@x</span><span class="o">=</span><span class="s2">&quot;a private instance variable&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">obj</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">new</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">instance_eval</span><span class="p">(</span><span class="vi">@x</span><span class="p">)</span> <span class="c1">#=&gt;&quot;a private instance variable&quot;</span>
+</pre></div>
+
+
+<ul>
+<li>注4: 有时，你会创建一个对象，仅仅是为了在其中执行块 ...</li></ul>
+                <a class="readmore" href="/metaprogrammingblock.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/metaprogrammingmethods.html" rel="bookmark"
+                           title="Permalink to Metaprogramming(Methods)">Metaprogramming(Methods)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-03T16:44:19+08:00">
+                Published: 六 03 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>Ruby是动态语言，没有静态类型检查，同时也提供了很多java等静态语言无法提
+供的编程技巧。本章主要专注于消除重复代码的技巧，通过用两种不同的方式对一
+段代码的重构来展示Ruby的强大功能，涉及的知识点比较少。
+<br>
+<img alt="methods" src="/images/methods.png" />
+<br>
+* 注1: method_missing()是Kernel中的一个实例方法，当Ruby找不到调用的方
+  法时，它最后就会调用这个名为method_missing()的方法。</p>
+<ul>
+<li>注2: 移除一个对象中的所有方法，以便把它们转换成幽灵方法。</li>
+</ul>
+<hr />
+<p><strong>重构例子</strong></p>
+<div class="highlight"><pre><span class="c1"># 原始代码</span>
+<span class="k">class</span> <span class="nc">Computer</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">computer_id</span><span class="p">,</span> <span class="n">data_source</span><span class="p">)</span>
+    <span class="vi">@id</span> <span class="o">=</span> <span class="n">computer_id</span>
+    <span class="vi">@data_source</span> <span class="o">=</span> <span class="n">data_source</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">mouse</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="vi">@data_source</span><span class="o">.</span><span class="n">get_mouse_info</span><span class="p">(</span><span class="vi">@id</span><span class="p">)</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="vi">@data_source</span><span class="o">.</span><span class="n">get_mouse_price</span><span class="p">(</span><span class="vi">@id</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;Mouse: </span><span class="si">#{</span><span class="n">info</span><span class="si">}</span><span class="s2"> ($</span><span class="si">#{</span><span class="n">price</span><span class="si">}</span><span class="s2">)&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;* </span><span class="si">#{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">price</span> <span class="o">&gt;=</span> <span class="mi">100 ...</span></pre></div>
+                <a class="readmore" href="/metaprogrammingmethods.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/metaprogrammingobjectmodel.html" rel="bookmark"
+                           title="Permalink to Metaprogramming(ObjectModel)">Metaprogramming(ObjectModel)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-02T20:44:57+08:00">
+                Published: 五 02 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>在Ruby程序中，除了对象之外，还有类、模块以及实例变量这些语言构件。这
+些语言构件存在于其中的系统称为<strong>对象模型</strong>。在对象模型中，你可以找到诸
+如"这个方法来自哪个类"和"当我包含这个模块是会发生什么"此类问题的答案。
+<br>
+<img alt="ObjectModel" src="/images/ObjectModel.png" />
+<br>
+* 注1: class关键字更像是一个作用域操作符而不是类型声明语句，它的确可以
+  创建一个还不存在的类，不过也可以把这看成是一个副作用。对于class关键
+  字，其核心任务是把你带到类的上下文中，让你可以在其中定义方法。</p>
+<ul>
+<li>
+<p>注2: 修改已有类的特性时，由于粗心导致bug，像这种鲁莽的修改方式被称为
+  猴子补丁。不过，如果是正确的运行打开类这种技术，猴子补丁也可以表示为
+  一个褒义词，会很有用。</p>
+</li>
+<li>
+<p>注3: 对象是一组实例变量外加一个指向其类的引用。对象的方法并不存在于对象本身，而是存在于对象的类中。在类中，这些方法被称为类的实例方法。
+类是一个对象（Class类的一个实例）外加一组实例方法和一个对其超类的引用。
+值得注意的是，实例变量存放在对象中，而方法存放在类中，比如</p>
+</li>
+</ul>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">MyClass</span>
+  <span class="k">def</span> <span class="nf">my_method ...</span></pre></div>
+                <a class="readmore" href="/metaprogrammingobjectmodel.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/metaprogrammingtutorial.html" rel="bookmark"
+                           title="Permalink to Metaprogramming(Tutorial)">Metaprogramming(Tutorial)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-04-29T21:56:38+08:00">
+                Published: 二 29 四月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>元编程(Metaprogramming)，简单来说，就是写出编写代码的代码。正式的定义为：编写在运行时操纵语言构件的代码。
+Ruby是一门对元编程支持很强大的语言(只是比lisp弱一点)，而且，元编程
+也是通向Ruby的高级编程之路。可以说，除非掌握了元编程否则不能算是真正掌
+握了Ruby。
+下图简要总结了<Ruby元编程>的基本内容，经验有限，不足之处请多指正。
+<br>
+<img alt="RubyMetaprogramming" src="/images/RubyMetaprogramming.png" />
+<br> 
+就如蜘蛛侠大叔曾经说的，能力越大，责任越大。元编程赋予了你强大的能力，同时也意味着你需要肩负更大的责任。</p>
+                <a class="readmore" href="/metaprogrammingtutorial.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/ruby-variables.html" rel="bookmark"
+                           title="Permalink to Ruby Variables">Ruby Variables</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-12T11:26:35+08:00">
+                Published: 三 12 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>ruby变量类型有其首位字符来决定，分类如下：<br />
+$      全局变量<br />
+@      实例变量<br />
+@@     类变量，在module中定义的模块变量可被所有包含该module的类所访问<br />
+[a-z]  局部变量<br />
+[A-Z]  常量<br />
+self   伪变量，永远指向当前正执行着的对象或未初始化变量的空值nil  </p>
+                <a class="readmore" href="/ruby-variables.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

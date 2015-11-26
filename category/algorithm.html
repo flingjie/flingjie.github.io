@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Jie's Blog - Algorithm</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/a-algorithm.html">A* Algorithm</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-04-22T18:10:18+08:00">
+                Published: 二 22 四月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/algorithm.html">Algorithm</a>.</p>
+
+</footer><!-- /.post-info --><p>A*算法是一种经典的启发式搜索算法,公式表示为：f(n)=g(n)+h(n)，其中f(n)
+是从初始点到目标点的估价函数，g(n)是从初始点到节点n的代价，h(n)是从节
+点n到目标节点的估计代价，保证找到最短路径关键在于估价函数h(n)的选取。  <br />
+一、几个相关知识：  <br />
+<strong>启发式搜索</strong>：启发式搜索就是在状态空间中的搜索对每一个搜索的位置进行评估，得到最好的位置，再从这个位置进行搜索直到目标。这样可以省略大量无畏的搜索路径，提到了效率。在启发式搜索中，对位置的估价是十分重要的。采用了不同的估价可以有不同的效果。</p>
+<p><strong>估价函数</strong>：从当前节点移动到目标节点的预估费用；这个估计就是启发式的。在寻路问题和迷宫问题中，我们通常用曼哈顿（manhattan）估价函数。</p>
+<p><strong>A*算法的特点</strong>：A*算法在理论上是时间最优的，但是也有缺点：它的空间增长是指数级别的。</p>
+<p><strong>A*算法与BFS</strong>：可以这样说，BFS是A<em>算法的一个特例。对于一个BFS算法，从当前节点扩展出来的每一个节点（如果没有被访问过的话）都要放进队列进行进一步扩展。也就是说BFS的估计函数h永远等于0，没有一点启发式的信息，可以认为BFS是“最烂的”A</em>算法。</p>
+<p><strong>IDA*算法</strong>：这种算法被称为迭代加深A<em>算法，可以有效的解决A</em>空间增长带来的问题，甚至可以不用到优先级队列。</p>
+<p>二、A*伪代码</p>
+<div class="highlight"><pre>    <span class="nx">push</span> <span class="nx">startNode</span> <span class="nx">onto</span> <span class="nx">openList</span>
+    <span class="k">while</span><span class="p">(</span><span class="nx">openList</span> <span class="nx">is</span> <span class="nx">not</span> <span class="nx">empty</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="nx">current</span> <span class="nx">is</span> <span class="nx">goal</span> <span class="k">return</span> <span class="nx">path</span>
+
+        <span class="nx">remove</span> <span class="nx">currentNode</span> <span class="nx">from</span> <span class="nx">openList</span>
+        <span class="nx">push</span> <span class="nx">currentNode</span> <span class="nx">onto</span> <span class="nx">closedList</span>
+        <span class="k">for</span> <span class="nx">each</span> <span class="nx">neighbor</span> <span class="k">in</span> <span class="nx">negighbors</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="nx">neighbor</span> <span class="nx">is</span> <span class="nx">not</span> <span class="k">in</span> <span class="nx">openList</span> <span class="p">{</span>
+                <span class="nx">save</span> <span class="nx">g</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">and</span> <span class="nx">f</span>
+                <span class="nx">save</span> <span class="nx">current</span> <span class="nx">parent</span>
+                <span class="nx">add</span> <span class="nx">neighbor</span> <span class="nx">to</span> <span class="nx">openList</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="nx">neighbor</span> <span class="nx">is</span> <span class="k">in</span> <span class="nx">openList</span>
+                <span class="nx">And</span> <span class="nx">g</span> <span class="nx">is</span> <span class="nx">better</span> <span class="nx">than</span> <span class="nx">previous</span> <span class="nx">g</span> <span class="p">{</span>
+                <span class="nx">save</span> <span class="nx">g</span> <span class="nx">and</span> <span class="nx">f</span>
+                <span class="nx">save</span> <span class="nx">the</span> <span class="nx">current</span> <span class="nx">parent</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+
+
+<p>三、coffeescript实现</p>
+<div class="highlight"><pre><span class="nv">astar =</span>
+    <span class="nv">init: </span><span class="nf">(grid) -&gt;</span>
+        <span class="k">for</span> <span class="nx">x</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">...</span><span class="nx">grid</span><span class="p">.</span><span class="nx">length</span><span class="p">]</span>
+            <span class="k">for</span> <span class="nx">y</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">...</span><span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="p">].</span><span class="nx">length</span><span class="p">]</span>
+                <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="p">].</span><span class="nv">f = </span><span class="mi">0</span>
+                <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="p">].</span><span class="nv">g = </span><span class="mi">0</span>
+                <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="p">].</span><span class="nv">h = </span><span class="mi">0</span>
+                <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="p">].</span><span class="nv">debug = </span><span class="s">&quot;&quot;</span>
+                <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="p">].</span><span class="nv">parent = </span><span class="kc">null</span>
+
+    <span class="nv">search: </span><span class="nf">(grid, start, end) -&gt;</span>
+        <span class="nx">astar</span><span class="p">.</span><span class="nx">init</span> <span class="nx">grid</span>
+
+        <span class="nv">openList = </span><span class="p">[]</span>
+        <span class="nv">closeList = </span><span class="p">[]</span>
+        <span class="nx">openList</span><span class="p">.</span><span class="nx">push</span> <span class="nx">start</span>
+
+        <span class="k">while</span> <span class="nx">openList</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+            <span class="c1"># 获取最小的f(x)的点</span>
+            <span class="nv">lowInd = </span><span class="mi">0</span>
+            <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">...</span><span class="nx">openList</span><span class="p">.</span><span class="nx">length</span><span class="p">]</span>
+                <span class="nv">lowInd = </span><span class="nx">i</span> <span class="k">if</span> <span class="nx">openList</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">f</span> <span class="o">&lt;</span> <span class="nx">openList</span><span class="p">[</span><span class="nx">lowInd</span><span class="p">].</span><span class="nx">f</span>
+            <span class="nv">currentNode = </span><span class="nx">openList</span><span class="p">[</span><span class="nx">lowInd</span><span class="p">]</span>
+
+            <span class="c1"># 到达目标点，返回路径</span>
+            <span class="k">if</span> <span class="nx">currentNode</span><span class="p">.</span><span class="nx">pos</span> <span class="o">is</span> <span class="nx">end</span><span class="p">.</span><span class="nx">pos</span>
+                <span class="nv">curr = </span><span class="nx">currentNode</span>
+                <span class="nv">ret = </span><span class="p">[]</span>
+                <span class="k">while</span> <span class="nx">curr</span><span class="p">.</span><span class="nx">parent</span>
+                    <span class="nx">ret</span><span class="p">.</span><span class="nx">push</span> <span class="nx">curr</span>
+                    <span class="nv">curr = </span><span class="nx">curr</span><span class="p">.</span><span class="nx">parent</span>
+                <span class="k">return</span> <span class="nx">ret</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+
+            <span class="c1"># 最短路径搜索过程</span>
+            <span class="c1"># 将当前点从openList移至closeList</span>
+            <span class="c1"># 处理当前点的每个相邻点</span>
+            <span class="nx">openList</span><span class="p">.</span><span class="nx">removeGraphNode</span> <span class="nx">currentNode</span>
+            <span class="nx">closeList</span><span class="p">.</span><span class="nx">push</span> <span class="nx">currentNode</span>
+            <span class="nv">neightbors = </span><span class="nx">astar</span><span class="p">.</span><span class="nx">neighbors</span> <span class="nx">grid</span><span class="p">,</span> <span class="nx">currentNode</span>
+
+            <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">...</span><span class="nx">neighbors</span><span class="p">.</span><span class="nx">length</span><span class="p">]</span>
+                <span class="nv">neighbor = </span><span class="nx">neighbor</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nx">closeList</span><span class="p">.</span><span class="nx">findGraphNode</span><span class="p">(</span><span class="nx">neighbor</span><span class="p">)</span> <span class="o">or</span> <span class="nx">neighbor</span><span class="p">.</span><span class="nx">isWall</span><span class="p">()</span>
+                    <span class="c1"># 无效点，跳至下一个相邻点</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># gScore 是起始点到当前点所经过的距离</span>
+                <span class="c1"># 需要判断当前相邻是否是最短距离</span>
+                <span class="nv">gScore = </span><span class="nx">currentNode</span><span class="p">.</span><span class="nx">g</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># 1是当前点到相邻点的距离</span>
+                <span class="nv">gScoreIsBest = </span><span class="kc">false</span>
+
+                <span class="k">if</span> <span class="o">!</span><span class="nx">openList</span><span class="p">.</span><span class="nx">findGraphNode</span><span class="p">(</span><span class="nx">neighbor</span><span class="p">)</span>
+                    <span class="c1"># 第一次到达当前点， 它必是当前最短距离</span>
+                    <span class="c1"># 并且，需要计算 h(x) </span>
+                    <span class="nv">gScoreIsBest = </span><span class="kc">true</span>
+                    <span class="nv">neighbor.h = </span><span class="nx">astar</span><span class="p">.</span><span class="nx">heuristic</span> <span class="nx">neighbor</span><span class="p">.</span><span class="nx">pos</span><span class="p">,</span> <span class="nx">end</span><span class="p">.</span><span class="nx">pos</span>
+                    <span class="nx">openList</span><span class="p">.</span><span class="nx">push</span> <span class="nx">neighbor</span>
+                <span class="k">else</span> <span class="k">if</span> <span class="nx">gScore</span> <span class="o">&lt;</span> <span class="nx">neighbor</span><span class="p">.</span><span class="nx">g</span>
+                    <span class="c1"># 已经到达过该点，并且路径短于上次</span>
+                    <span class="nv">gScoreIsBest = </span><span class="kc">true</span>
+
+                <span class="k">if</span> <span class="nx">gScoreIsBest</span>
+                    <span class="c1"># 找到当前的最短路径，将它保存起来</span>
+                    <span class="nv">neighbor.parent = </span><span class="nx">currentNode</span>
+                    <span class="nv">neighbor.g = </span><span class="nx">gScore</span>
+                    <span class="nv">neighbor.f = </span><span class="nx">neighbor</span><span class="p">.</span><span class="nx">g</span> <span class="o">+</span> <span class="nx">neighbor</span><span class="p">.</span><span class="nx">h</span>
+                    <span class="nv">neighbor.debug = </span><span class="s">&quot;F: &quot;</span> <span class="o">+</span> <span class="nx">neighbor</span><span class="p">.</span><span class="nx">f</span> <span class="o">+</span>
+                        <span class="s">&quot;&lt;br/&gt;G: &quot;</span> <span class="o">+</span> <span class="nx">neighbor</span><span class="p">.</span><span class="nx">g</span> <span class="o">+</span> <span class="s">&quot;&lt;br/&gt;H:&quot;</span> <span class="o">+</span> <span class="nx">neighbor</span><span class="p">.</span><span class="nx">h</span>
+
+        <span class="c1"># 未找到最短路径，返回空</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="nv">heuristic: </span><span class="nf">(pos0, pos1) -&gt;</span>
+        <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">pos1</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">pos0</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">pos1</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span><span class="nx">pos0</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span>
+
+    <span class="nv">neighbors: </span><span class="nf">(grid, node) -&gt;</span>
+        <span class="nv">ret = </span><span class="p">[]</span>
+        <span class="nv">x = </span><span class="nx">node</span><span class="p">.</span><span class="nx">pos</span><span class="p">.</span><span class="nx">x</span>
+        <span class="nv">y = </span><span class="nx">node</span><span class="p">.</span><span class="nx">pos</span><span class="p">.</span><span class="nx">y</span>
+
+        <span class="nx">ret</span><span class="p">.</span><span class="nx">push</span> <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="p">]</span> <span class="k">if</span> <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">?</span><span class="p">[</span><span class="nx">y</span><span class="p">]</span><span class="o">?</span> 
+        <span class="nx">ret</span><span class="p">.</span><span class="nx">push</span> <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="nx">y</span><span class="p">]</span> <span class="k">if</span> <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">?</span><span class="p">[</span><span class="nx">y</span><span class="p">]</span><span class="o">?</span> 
+        <span class="nx">ret</span><span class="p">.</span><span class="nx">push</span> <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="p">]</span><span class="o">?</span><span class="p">[</span><span class="nx">y</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">?</span> 
+        <span class="nx">ret</span><span class="p">.</span><span class="nx">push</span> <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="p">]</span><span class="o">?</span><span class="p">[</span><span class="nx">y</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">?</span> 
+</pre></div>
+
+
+<p>参考： <br />
+<a href="http://en.wikipedia.org/wiki/A*_search_algorithm#Algorithm_description">A* search algorithm description on wiki</a> <br />
+<a href="http://www.briangrinstead.com/blog/astar-search-algorithm-in-javascript">astar-search-algorithm-in-javascript</a> <br />
+<a href="http://qiao.github.io/PathFinding.js/visual/">vistual PathFinding.js</a>  <br />
+<a href="http://www.cppblog.com/mythit/archive/2009/04/19/80492.aspx">A*算法入门</a></p>                </article>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

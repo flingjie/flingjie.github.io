@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Metaprogramming(ObjectModel)</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/metaprogrammingobjectmodel.html" rel="bookmark"
+           title="Permalink to Metaprogramming(ObjectModel)">Metaprogramming(ObjectModel)</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-02T20:44:57+08:00">
+                Published: 五 02 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->      <p>在Ruby程序中，除了对象之外，还有类、模块以及实例变量这些语言构件。这
+些语言构件存在于其中的系统称为<strong>对象模型</strong>。在对象模型中，你可以找到诸
+如"这个方法来自哪个类"和"当我包含这个模块是会发生什么"此类问题的答案。
+<br>
+<img alt="ObjectModel" src="/images/ObjectModel.png" />
+<br>
+* 注1: class关键字更像是一个作用域操作符而不是类型声明语句，它的确可以
+  创建一个还不存在的类，不过也可以把这看成是一个副作用。对于class关键
+  字，其核心任务是把你带到类的上下文中，让你可以在其中定义方法。</p>
+<ul>
+<li>
+<p>注2: 修改已有类的特性时，由于粗心导致bug，像这种鲁莽的修改方式被称为
+  猴子补丁。不过，如果是正确的运行打开类这种技术，猴子补丁也可以表示为
+  一个褒义词，会很有用。</p>
+</li>
+<li>
+<p>注3: 对象是一组实例变量外加一个指向其类的引用。对象的方法并不存在于对象本身，而是存在于对象的类中。在类中，这些方法被称为类的实例方法。
+类是一个对象（Class类的一个实例）外加一组实例方法和一个对其超类的引用。
+值得注意的是，实例变量存放在对象中，而方法存放在类中，比如</p>
+</li>
+</ul>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">MyClass</span>
+  <span class="k">def</span> <span class="nf">my_method</span>
+    <span class="vi">@v</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">obj</span> <span class="o">=</span> <span class="no">MyClass</span><span class="o">.</span><span class="n">new</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">class</span>              <span class="c1"># =&gt; MyClass</span>
+</pre></div>
+
+
+<p>上面代码结构可表示为：
+<img alt="ObjectClass" src="/images/ObjectClass.png" /></p>
+<ul>
+<li>
+<p>注4: 一个类只不过是一个增强的Module，它只是在Module基础上增加了三个
+  方法——new()、allocate()和superclass()而已，结构如下。
+  <img alt="ModuleClass" src="/images/ModuleClass.png" /></p>
+</li>
+<li>
+<p>注5: 每个类都有一个祖先链，这个链从自己所属的类开始，向上直到BasicObject结束。其中，Object类包含了Kernel模块，故Kernel方法对所有对象可用。</p>
+</li>
+</ul>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

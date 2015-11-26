@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Note</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/note.html" rel="bookmark"
+           title="Permalink to Note"><Sectets of the Javascript Ninja>Note</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-11-22T13:53:52+08:00">
+                Published: 日 22 十一月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/note.html">Note</a>.</p>
+
+</footer><!-- /.post-info -->      <h2>Enter the ninja</h2>
+<p>Javascript consists of a close relationship between objects, functions
+and closures.
+<img alt="javascript" src="images/javascript.png" /></p>
+<h2>Arming with testing and debugging</h2>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+    <span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+        <span class="k">try</span><span class="p">{</span>
+            <span class="nx">opera</span><span class="p">.</span><span class="nx">postError</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">opera</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+        <span class="p">}</span><span class="nx">catche</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">join</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h2>Functions are fundamental</h2>
+<ul>
+<li>The scope of declaration within a function differs from that of most
+  other languages. Specifically:</li>
+<li>Variables within a function are in scope from their point of
+     declaration to the end of the function, spanning block
+     boundaries.</li>
+<li>
+<p>Inner named functions are available anywhere within the enclosing
+     function, even as forward references.</p>
+</li>
+<li>
+<p>The parameters list of a function and its actual argument list can
+  be of different lengths:</p>
+</li>
+<li>Unassigned parameters evaluate as undefined.</li>
+<li>
+<p>Extra arguments are simply not bound to parameter names.</p>
+</li>
+<li>
+<p>Each function invocation is passed two implicit parameter names</p>
+</li>
+<li>arguments, a collection of the actual passed arguments</li>
+<li>
+<p>this, a reference to the object of the object serving as the
+     function context</p>
+</li>
+<li>
+<p>Functions can be invoked in various ways, and the invocation
+  mechanism determines the function context value:</p>
+</li>
+<li>when invoked as a simple function, the context is the global
+     object(window).</li>
+<li>When invoked as a method, the contect is the object owning the
+     method.</li>
+<li>When invoked as a constructor, the context is a newly allocated
+     object.</li>
+<li>When invoked via the apply() or call() methods of the function,
+     the context can be whatever the heck we want.</li>
+</ul>
+<h2>Wielding functions</h2>
+<ul>
+<li>Anonymous functions let us create smaller units of execution rather
+  than large functions full of imperative statements.</li>
+<li>Functions can have properties and those properties can be used to
+  store any information we might wish to use.</li>
+</ul>
+<h2>Closing in on closures</h2>
+<ul>
+<li>Binding function context</li>
+<li>Partially applying functions</li>
+<li>Overriding function behavior</li>
+<li>Immediate function
+  :::javascript
+  (function(){})()</li>
+<li>Temporary scope and private variables</li>
+<li>Loops</li>
+<li>Library wrapping</li>
+</ul>
+<h2>Object-orientation with prototypes</h2>
+<p><img alt="prototype" src="images/js_prototype.png" /></p>
+<h2>Wrangling regular expressions</h2>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">re1</span> <span class="o">=</span> <span class="sr">/test/i</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">re2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">);</span>
+</pre></div>
+
+
+<h2>Taming threads and timers</h2>
+<p><img alt="timer" src="images/js_timer.png" /></p>
+<h2>Ninja alchemy:runtime code evaluation</h2>
+<ul>
+<li>use <code>eval()</code> to create runtime code evalution</li>
+<li>Json conversion</li>
+<li>moving definitions between namespaces</li>
+<li>minimization and obfuscation of Javascript code</li>
+<li>dynamic code rewriting and injection</li>
+<li>creating metalanguages</li>
+</ul>
+<h2>With statements</h2>
+<ul>
+<li>The use of <code>with</code> should be avoid.</li>
+</ul>
+<h2>Developing cross-browser strategies</h2>
+<ul>
+<li>Reusable cross-browser development involves juggling three factors:</li>
+<li>Code size -- Keeping the file size small</li>
+<li>Performance overhead -- Keeping the performance level above a
+     palatable minimum</li>
+<li>API quality -- Making sure that the APIs provided work uniformly
+     across browsers</li>
+</ul>
+<h2>Cutting through attributes, porperties, and CSS</h2>
+<ul>
+<li>Versions of IE prior to IE 9 don't allow the type attribute of
+  &lt;input> elements to be changed once the element is part of the DOM</li>
+<li>The style attribute poses some unique challenges and doesn't contain
+  the computed style for the element</li>
+<li>Computed style can be fetched from the window using standardized API
+  in modern browsers, and via a proprietary property on IE 8 and
+  earlier</li>
+</ul>
+<h2>Surviving events</h2>
+<ul>
+<li>addEventListener()</li>
+<li>removeEventListener()</li>
+</ul>
+<h2>Manipulating the DOM</h2>
+<ul>
+<li>Injecting HTML into a page</li>
+<li>Cloning elements</li>
+<li>Removing elements</li>
+<li>Manipulating element text</li>
+</ul>
+<h2>CSS selector engines</h2>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

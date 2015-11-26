@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Jie's Blog</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+                <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="9">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/generator-in-python.html" rel="bookmark"
+                           title="Permalink to Generator in Python">Generator in Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-14T11:52:54+08:00">
+                Published: 五 14 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/python.html">Python</a>.</p>
+
+</footer><!-- /.post-info -->                <p>生成器是可以当作iterator使用的特殊函数。它有以下优点： <br />
+1. 惰性求值； <br />
+2. 在处理大的列表时不需要一次性加载全部数据，可以减小内存使用； <br />
+除非特殊的原因，应该在代码中使用生成器。</p>
+<p><strong>生成器(generator) vs 函数(function)</strong> <br />
+生成器和函数的主要区别在于函数return a value, 生成器yield a value同时
+记录以便在下次调用时从上次的状态下恢复执行。</p>
+<p><strong>生成器(generator) vs 迭代器(iterator)</strong> <br />
+ * 迭代器是一个更一般的概念，它是一个有next方法和返回self的__iter__方
+法的类。 <br />
+ * 每个生成器是一个迭代器，但迭代器不一定是生成器，生成器是有记录上次
+ 执行状态的迭代器。从这点上看生成器有点像闭包，只是它记录的不是数据
+ 的状态，记录的是执行过程中的状态。</p>
+<p><strong>生成器(generator) vs 续延(coninuations)</strong>
+与生成器相比，续延更加灵活，续延允许你调用不同状态的执行过程，而不像生
+成器这样直接返回。</p>
+<p><strong>创建生成器</strong> <br />
+在python可以使用以下方式创建生成器： <br />
+1 ...</p>
+                <a class="readmore" href="/generator-in-python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/ruby-variables.html" rel="bookmark"
+                           title="Permalink to Ruby Variables">Ruby Variables</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-12T11:26:35+08:00">
+                Published: 三 12 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>ruby变量类型有其首位字符来决定，分类如下：<br />
+$      全局变量<br />
+@      实例变量<br />
+@@     类变量，在module中定义的模块变量可被所有包含该module的类所访问<br />
+[a-z]  局部变量<br />
+[A-Z]  常量<br />
+self   伪变量，永远指向当前正执行着的对象或未初始化变量的空值nil  </p>
+                <a class="readmore" href="/ruby-variables.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/javascript-tips.html" rel="bookmark"
+                           title="Permalink to Javascript Tips">Javascript Tips</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-09T10:04:47+08:00">
+                Published: 日 09 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/javascript.html">Javascript</a>.</p>
+
+</footer><!-- /.post-info -->                <p><strong> Append an array to existing Array </strong></p>
+<p>``` javascript Append an array to existing Array 
+var a = [1,2,3];
+var b = [4,5,6];
+Array.prototype.push.apply(a,b);
+// a contains [1,2,3,4,5,6]</p>
+<div class="highlight"><pre>  <span class="nx">And</span> <span class="nx">use</span> <span class="nx">concat</span><span class="p">()</span> <span class="nx">method</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">same</span> <span class="nx">but</span> <span class="nx">cancat</span><span class="p">()</span> <span class="nx">creates</span> <span class="k">new</span> <span class="nx">array</span> <span class="k">while ...</span></pre></div>
+                <a class="readmore" href="/javascript-tips.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/notebooks-of-the-mind.html" rel="bookmark"
+                           title="Permalink to Notebooks of the Mind">Notebooks of the Mind</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-05-31T23:26:20+08:00">
+                Published: 五 31 五月 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/note.html">Note</a>.</p>
+
+</footer><!-- /.post-info -->                <ul>
+<li>These incessant dialectical movements -- between process and
+  product, person and society, one modality and another, intention and
+  expression --are the core of the creative process.</li>
+<li>Albert Einstein describes some of his ways of thinking: The words or
+  the language, as they are written or spoken, do not seem to play ...</li></ul>
+                <a class="readmore" href="/notebooks-of-the-mind.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/mastery.html" rel="bookmark"
+                           title="Permalink to Mastery">Mastery</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-12-26T22:58:58+08:00">
+                Published: 三 26 十二月 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/note.html">Note</a>.</p>
+
+</footer><!-- /.post-info -->                <ul>
+<li>
+<p>Mastery is not about perfection. It’s about a process, a journey.
+  The master is the one who stays on the path day after day, year
+  after year. The master is the one who is willing to try, and fail,
+  and try again, for as long as he or she ...</p></li></ul>
+                <a class="readmore" href="/mastery.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/the-art-of-learning.html" rel="bookmark"
+                           title="Permalink to The Art of Learning">The Art of Learning</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-12-06T23:20:30+08:00">
+                Published: 四 06 十二月 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/note.html">Note</a>.</p>
+
+</footer><!-- /.post-info -->                <p>追求卓越的关键在于，要坚持充满活力、长期的学习过程，不再满足于原地踏步、
+平平庸庸。</p>
+<ol>
+<li><em>划小圈</em>：自己的最佳状态。 　　 </li>
+<li><em>漩涡效应：</em> 在体育比赛当中我们经常会发现一个现象，原本势均力敌双方
+   中的一方在犯了一个错误之后往往连续失分，最后彻底溃败。大部分时候 双
+   方对峙的差距其实只是一线之隔，当情况变化之后我们可能丧失了优势，而
+   我们的内心往往并不能很好地接受这个变化。这个时候心理的微妙变化往往
+   会使得我们 的表现大失水准。我们往往不能理性地面对沉默资本，我们应该
+   尽可能地去冷静，去深呼吸，去接受这个变化。 　　</li>
+<li><em>整理理论、渐进理论：</em> 其实这是我们讨论的最欢乐的一部分。究竟是不是
+   有天才？所谓的天才究竟是天生为主还是后天为主？究竟该坚持结果主义 还
+   是过程主义？我个人觉得整体理论只是作为一个反例出现在书中，那种自以
+   为是的状态，自以为自己高过别人的心理是没办法持续突破自己的。只有坦
+   然地接纳自 己的强项和弱项，在每次比赛之后总结得失，才是真正可以内化
+   的修炼。更重要的是，这是我们个人与企业突破天花板的唯一方式。当你敢
+   于犯错，乐于失败的时 ...</li></ol>
+                <a class="readmore" href="/the-art-of-learning.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+<p class="paginator">
+        <a href="/index2.html">&laquo;</a>
+    Page 3 / 3
+</p>
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

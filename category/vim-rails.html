@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Jie's Blog - Vim, Rails</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/emacs.html">emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/vim.html">Vim</a></li>
+                    <li class="active"><a href="/category/vim-rails.html">Vim, Rails</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/vim-for-rails.html">Vim for Rails</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-05-27T01:35:30+08:00">
+                Published: Tue 27 May 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/vim-rails.html">Vim, Rails</a>.</p>
+
+</footer><!-- /.post-info --><p>使用vim来进行Rails开发，对配置过程略做记录，前提vim已安装完毕。 <br />
+1、 <strong>安装pathogen</strong> <br />
+pathogens是vim的插件管理工具，可简化对vim插件的管理。 <br />
+安装如下：</p>
+<div class="highlight"><pre>mkdir -p ~/.vim/autoload ~/.vim/bundle; \
+curl -LSso ~/.vim/autoload/pathogen.vim \
+    https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim;
+</pre></div>
+
+
+<p>然后在<code>.vimrc</code>中加入：</p>
+<div class="highlight"><pre>execute pathogen#infect()
+&quot; 加在下列配置之前
+syntax on
+filetype plugin indent on
+</pre></div>
+
+
+<p>2、 <strong>rails.vim</strong> <br />
+rails插件，无需多介绍。 <br />
+常用快捷键:</p>
+<div class="highlight"><pre>gf           =&gt;  跳转到定义
+ctrl+6       =&gt;  返回上一文件
+</pre></div>
+
+
+<p>常用命令：</p>
+<div class="highlight"><pre><span class="c1"># 查找文件</span>
+<span class="ss">:Rfind</span> <span class="n">routes</span><span class="o">.</span><span class="n">rb</span>
+
+<span class="c1"># 打开model</span>
+<span class="ss">:Rmodel</span> <span class="n">user</span>
+
+<span class="c1"># 打开controller</span>
+<span class="ss">:Rcontroller</span> <span class="n">users</span>
+<span class="ss">:Rcont</span> <span class="n">users</span>
+
+<span class="c1"># 打开view</span>
+<span class="ss">:Rview</span> <span class="n">user</span><span class="o">/</span><span class="n">index</span>
+<span class="ss">:Rview</span> <span class="n">user</span><span class="o">/</span><span class="n">_user</span>
+
+<span class="c1"># 启动server</span>
+<span class="ss">:Rserver</span>
+<span class="c1"># 关闭server</span>
+<span class="ss">:Rserver!</span> <span class="o">-</span>
+
+<span class="c1"># 打开js文件</span>
+<span class="ss">:Rjavascript</span> <span class="n">js_name</span>
+</pre></div>
+
+
+<p><strong>注</strong>:其<code>Rtag</code>命令使用的是<code>exuberant-ctags</code>中的<code>ctags</code>，安装Emacs后也会安装一个<code>ctag</code>工具，会与之冲突，可以将Emacs的<code>ctags</code>重命名后安装<code>exuberant-ctags</code>解决之。</p>
+<p>3、 <strong>nerdtree</strong> <br />
+显示目录树，命令<code>:NERDTree</code>显示目录。   </p>
+<p>4、 <strong>vim-surround</strong> <br />
+方便输入括号等的插件，使用<code>ctrl+g s =</code>，即可插入<code>&lt;%=  %&gt;</code>。   </p>
+<p>5、 <strong>sparkup</strong> <br />
+html编写插件，输入<code>div#header</code>，然后按<code>ctrl+e</code>，就会扩展为
+<code>&lt;div id="header"&gt;&lt;/div&gt;</code>。</p>
+<p>6、 <strong>snipmate</strong> <br />
+代码片段补全</p>
+<p>7、 <strong>neocomplcache</strong> <br />
+代码补全提示</p>
+<p>8、 <strong>auto-pairs</strong> <br />
+括号自动补全</p>                </article>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

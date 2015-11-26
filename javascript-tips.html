@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Javascript Tips</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/javascript-tips.html" rel="bookmark"
+           title="Permalink to Javascript Tips">Javascript Tips</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-09T10:04:47+08:00">
+                Published: 日 09 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/javascript.html">Javascript</a>.</p>
+
+</footer><!-- /.post-info -->      <p><strong> Append an array to existing Array </strong></p>
+<p>``` javascript Append an array to existing Array 
+var a = [1,2,3];
+var b = [4,5,6];
+Array.prototype.push.apply(a,b);
+// a contains [1,2,3,4,5,6]</p>
+<div class="highlight"><pre>  <span class="nx">And</span> <span class="nx">use</span> <span class="nx">concat</span><span class="p">()</span> <span class="nx">method</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">same</span> <span class="nx">but</span> <span class="nx">cancat</span><span class="p">()</span> <span class="nx">creates</span> <span class="k">new</span> <span class="nx">array</span> <span class="k">while</span> <span class="nb">Array</span> <span class="nx">Prototype</span> <span class="nx">push</span> <span class="nx">append</span> <span class="nx">to</span> <span class="nx">existing</span> <span class="nx">array</span> <span class="nx">itself</span><span class="p">.</span>
+
+<span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span>
+
+<span class="o">**</span> <span class="nx">Define</span> <span class="nx">a</span> <span class="kd">function</span> <span class="nx">which</span> <span class="nx">takes</span> <span class="nx">a</span> <span class="nx">string</span> <span class="nx">as</span> <span class="nx">an</span> <span class="nx">argument</span><span class="p">,</span> <span class="nx">and</span> <span class="k">return</span> <span class="nx">the</span> <span class="nx">same</span> <span class="nx">string</span> <span class="nx">separated</span> <span class="nx">by</span> <span class="nx">a</span> <span class="nx">space</span> <span class="o">**</span>
+
+<span class="err">```</span> <span class="nx">javascript</span> <span class="nx">separated</span> <span class="nx">by</span> <span class="nx">a</span> <span class="nx">space</span>
+<span class="kd">function</span> <span class="nx">spacify</span><span class="p">(</span><span class="nx">str</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<hr />
+<p><strong> Pass string argument to <em>console.log()</em> </strong></p>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">log</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><strong> Prefix all logged messages with <em>"(app)"</em> </strong></p>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">log</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+    <span class="nx">args</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="s1">&#39;(app)&#39;</span><span class="p">);</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

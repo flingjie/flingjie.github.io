@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Jie's Blog - Vim</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/vim-tips.html">Vim Tips</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-02-06T22:31:15+08:00">
+                Published: 五 06 二月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/vim.html">Vim</a>.</p>
+
+</footer><!-- /.post-info --><ul>
+<li>缩进： 10 &gt;&gt;</li>
+<li>宏： qa q @a</li>
+</ul>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/vim-for-rails.html" rel="bookmark"
+                           title="Permalink to Vim for Rails">Vim for Rails</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-27T01:35:30+08:00">
+                Published: 二 27 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/vim.html">Vim</a>.</p>
+
+</footer><!-- /.post-info -->                <p>使用vim来进行Rails开发，对配置过程略做记录，前提vim已安装完毕。 <br />
+1、 <strong>安装pathogen</strong> <br />
+pathogens是vim的插件管理工具，可简化对vim插件的管理。 <br />
+安装如下：</p>
+<div class="highlight"><pre>mkdir -p ~/.vim/autoload ~/.vim/bundle; \
+curl -LSso ~/.vim/autoload/pathogen.vim \
+    https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim;
+</pre></div>
+
+
+<p>然后在<code>.vimrc</code>中加入：</p>
+<div class="highlight"><pre>execute pathogen#infect()
+&quot; 加在下列配置之前
+syntax on
+filetype plugin indent on
+</pre></div>
+
+
+<p>2、 <strong>rails.vim</strong> <br />
+rails插件，无需多介绍。 <br />
+常用快捷键:</p>
+<div class="highlight"><pre>gf ...</pre></div>
+                <a class="readmore" href="/vim-for-rails.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

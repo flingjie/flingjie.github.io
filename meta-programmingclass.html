@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Meta programming(Class)</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/meta-programmingclass.html" rel="bookmark"
+           title="Permalink to Meta programming(Class)">Meta programming(Class)</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-03T17:51:04+08:00">
+                Published: 六 03 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->      <p>在Ruby中，使用class定义类时，实际上是在运行代码，这与java之类的静态语
+言有很大的差别。  <br />
+另外，类只是一个增强的模块，因此，任何适用于类的东西也
+适用于模块。
+<br>
+<img alt="Object Definitions" src="/images/ObjectDefinitions.png" />
+<br>
+ * 注1:在类(或模块)定义时，类本身充当了当前对象self的角色。</p>
+<div class="highlight"><pre><span class="n">result</span> <span class="o">=</span> <span class="k">class</span> <span class="nc">MyClass</span>
+  <span class="nb">self</span>
+<span class="k">end</span>
+
+<span class="n">result</span>     <span class="c1"># =&gt;  MyClass</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>注2:Ruby中总是存在一个当前对象self，与此类似，也总是存在一个当前类
+   （或模块）。每当通过class关键字来打开一个类时，这个类就成为当前类，
+   但是使用class关键字需要一个类的名字。
+   如果只有一个类的引用，需要用class_eval()方法打开这个类。</p>
+</li>
+<li>
+<p>注3：类实例变量仅仅是属于Class类对象的普通实例变量。它仅仅可以被类
+   本身所访问，而不能被类的实例或之类所访问。</p>
+</li>
+<li>
+<p>注4：类方法的实质，它们只是一个类的单件方法。</p>
+</li>
+<li>
+<p>注5: 在类定义中使用一个类方法。</p>
+</li>
+<li>
+<p>注6: eigenclass是一个对象特有的隐藏类，它是单件方法存在的地方。Ruby中可以使用如下语法进入eigenclass的作用域。</p>
+</li>
+</ul>
+<div class="highlight"><pre><span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="n">an_object</span> 
+  <span class="c1"># do something</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>注7: 如果对象是eigenclass，那么Ruby不是从它所在的类开始，而是从这个
+   eigenclass类中开始查找方法，如图。
+   <br>
+   <img alt="Eigenclass" src="/images/eigenclassMethod.png" /></p>
+</li>
+<li>
+<p>注8: 一个对象的eigenclass的超类是这个对象的类，一个类的eigenclass的
+   超类是这个类的超类的eigenclass,如图。
+   <img alt="eigenclassInherit" src="/images/eigenclassInherit.png" /></p>
+</li>
+<li>
+<p>注9: 通过向类的eigenclass中混入模块来定义类方法。</p>
+</li>
+<li>
+<p>注10: 通过给一个对象的eigenclass混入模块来定义单件方法。</p>
+</li>
+<li>
+<p>注11: 1. 给方法定义一个别名；2.重新定义这个方法；3.在新的方法中调用老的方法。</p>
+</li>
+<li>
+<p>注12: 1.环绕别名是一种猴子补丁，可能会破坏已有代码。2.你永远不该把一个环绕别名加载两次。</p>
+</li>
+</ul>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

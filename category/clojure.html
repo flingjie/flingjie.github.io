@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Jie's Blog - Clojure</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/recursive-clojure.html">Recursive Clojure</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-03-18T21:23:52+08:00">
+                Published: 二 18 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/clojure.html">Clojure</a>.</p>
+
+</footer><!-- /.post-info --><p>一般函数可以通过调用自身来实现递归的效果，但这种方式会消耗栈有导致栈
+溢出。比如下面这个计算阶乘的例子：</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">recur-fac</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="mi">1</span> <span class="nv">n</span><span class="p">)</span>
+        <span class="mi">1</span>
+        <span class="p">(</span><span class="nb">* </span><span class="nv">n</span> <span class="p">(</span><span class="nf">recur-fac</span> <span class="p">(</span><span class="nb">dec </span><span class="nv">n</span><span class="p">)))))</span>
+</pre></div>
+
+
+<p>通常，可以改写成尾递归的方式来避免消耗栈导致栈溢出，改写如下：</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">recur-fac</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">letfn</span> <span class="p">[(</span><span class="nf">fac</span> <span class="p">[</span><span class="nv">c</span> <span class="nv">r</span><span class="p">]</span>
+                <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="mi">0</span> <span class="nv">c</span><span class="p">)</span>
+                    <span class="nv">r</span>
+                    <span class="p">(</span><span class="nf">fac</span> <span class="p">(</span><span class="nb">dec </span><span class="nv">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">* </span><span class="nv">c</span> <span class="nv">r</span><span class="p">))))]</span>
+    <span class="p">(</span><span class="nf">fac</span> <span class="nv">n</span> <span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>上面的写法使用了尾递归，在common lisp的语言中可以达到尾递归优化(TCO)，
+问题是clojure是基于JVM，无法支持完全的TCO，这主要是Java的安全模型决定
+的。还好Clojue也支持同一个函数体直接调用自身的TCO，只是要使用clojure的
+特殊形式，即使用recur关键字。改写如下：</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">recur-fac</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">letfn</span> <span class="p">[(</span><span class="nf">fac</span> <span class="p">[</span><span class="nv">c</span> <span class="nv">r</span><span class="p">]</span>
+                <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="mi">0</span> <span class="nv">c</span><span class="p">)</span>
+                    <span class="nv">r</span>
+                    <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">dec </span><span class="nv">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">* </span><span class="nv">c</span> <span class="nv">r</span><span class="p">))))]</span>
+    <span class="p">(</span><span class="nf">fac</span> <span class="nv">n</span> <span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>好了，这样修改后，就不会有栈溢出的危险了。
+上述例子是在同一个函数中进行自身调用，如果要在两个函数中相互调用则需要
+用到trampoline，使用如下：</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">declare </span><span class="nv">is-odd?</span><span class="p">)</span>
+<span class="p">(</span><span class="kd">defn </span><span class="nv">is-even?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="nv">true</span>
+        <span class="o">#</span><span class="p">(</span><span class="nf">is-odd?</span> <span class="p">(</span><span class="nb">dec </span><span class="nv">n</span><span class="p">))))</span>
+<span class="p">(</span><span class="kd">defn </span><span class="nv">is-odd?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="nv">false</span>
+        <span class="o">#</span><span class="p">(</span><span class="nf">is-even?</span> <span class="p">(</span><span class="nb">dec </span><span class="nv">n</span><span class="p">))))</span>
+</pre></div>
+
+
+<p>调用：</p>
+<div class="highlight"><pre><span class="nv">user</span><span class="o">=</span>&gt; <span class="o">(</span>trampoline is-odd? 10000000<span class="o">)</span>
+<span class="nb">false</span>
+<span class="nv">user</span><span class="o">=</span>&gt; <span class="o">(</span>trampoline is-even? 10000<span class="o">)</span>  
+<span class="nb">true</span>
+</pre></div>                </article>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

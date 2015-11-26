@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+        <meta charset="utf-8" />
+        <title>Description in Python</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Jie's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/emacs.html">Emacs</a></li>
+                    <li><a href="/category/note.html">Note</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/description-in-python.html" rel="bookmark"
+           title="Permalink to Description in Python">Description in Python</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-15T16:27:32+08:00">
+                Published: 六 15 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/python.html">Python</a>.</p>
+
+</footer><!-- /.post-info -->      <p>在python中一个描述器就是定义下面的方法中一个或多个的一个对象：</p>
+<div class="highlight"><pre><span class="n">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span><span class="n">t</span>
+<span class="n">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="n">__delete__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
+</pre></div>
+
+
+<p>如果一个对象同时定义了<code>__get__()</code>和<code>__set__()</code>，它叫做资料描述器。只定义了<code>__get__()</code>的描述器叫做非资料描述器(一般用于方法)。
+资料描述器和非资料描述器的区别在于：相对于实例字典的优先级。如果实例字典中有与资料描述器同名的属性，优先使用资料描述器中的；如果实例字典中有与非资料描述器中同名的属性，优先使用实例字典中的。即优先级 资料描述器 &gt; 实例字典 &gt; 非资料描述器。 <br />
+要想写一个只读的资料描述器，只需同时定义<code>__get__()</code>和<code>__set__()</code>并在<code>__set__()</code>中抛出一个<code>AttributeError</code>。</p>
+<p><strong>描述器的调用</strong> <br />
+描述器可以直接这么调用：<code>descriptor.__get__(obj)</code>，不过一般都是用来拦截对实例属性的访问。 <br />
+描述器的调用规则如下：   </p>
+<ul>
+<li><code>__get__(self, instance, owner)</code></li>
+</ul>
+<div class="highlight"><pre>  <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span>         <span class="n">will</span> <span class="n">call</span> <span class="n">descriptor</span><span class="o">.</span><span class="n">__get__</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span> <span class="n">OwnerClass</span><span class="p">)</span>
+  <span class="n">OwnerClass</span><span class="o">.</span><span class="n">descriptor</span>  <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__get__</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">OwnerClass</span><span class="p">)</span>
+</pre></div>
+
+
+<ul>
+<li><code>__set__(self, instance, value)</code></li>
+</ul>
+<div class="highlight"><pre>  <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span> <span class="o">=</span> <span class="mi">5</span>     <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__set__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+
+<ul>
+<li><code>__delete__(self, instance)</code></li>
+</ul>
+<div class="highlight"><pre>  <span class="k">del</span> <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span>     <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__delete__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</pre></div>
+
+
+<p><em>参考资料：</em> <br />
+<a href="http://openhome.cc/Gossip/Python/Descriptor.html">Python Gossip: 描述器</a> <br />
+<a href="https://pyzh.readthedocs.org/en/latest/Descriptor-HOW-TO-Guide.html">Python描述器引导</a> <br />
+<a href="http://docs.python.org/2/howto/descriptor.html">Descriptor HowTo Guide</a> <br />
+<a href="http://me.veekun.com/blog/2012/05/23/python-faq-descriptors/">Python descriptor</a> <br />
+<a href="http://me.veekun.com/blog/2012/05/23/python-faq-descriptors/">Python FAQ: Descriptors</a>   </p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/flingjie">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
