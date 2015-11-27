@@ -51,15 +51,15 @@ buying cerificate. I use
 <p>For e-commerce websites, use OV(Organization Verified) SSL. For
 financial websites, use EV(Extended Verified) SSL.</p>
 <h5>Enable in Nginx</h5>
-<div class="highlight"><pre><span class="n">server</span> <span class="p">{</span>
-    <span class="n">listen</span> <span class="mi">443</span> <span class="n">ssl</span><span class="p">;</span>
+<div class="highlight"><pre>server {
+    listen 443 ssl;
 
-    <span class="n">server_name</span> <span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="p">;</span>    
-    <span class="n">ssl_certificate</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">example</span><span class="p">.</span><span class="n">com_bundle</span><span class="p">.</span><span class="n">crt</span><span class="p">;</span>
-    <span class="n">ssl_certificate_key</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="p">.</span><span class="n">key</span><span class="p">;</span>
+    server_name example.com;    
+    ssl_certificate /etc/ssl/private/example.com_bundle.crt;
+    ssl_certificate_key /etc/ssl/private/example.com.key;
 
-    <span class="p">...</span>
-<span class="p">}</span>
+    ...
+}
 </pre></div>
     </div><!-- /.entry-content -->
 

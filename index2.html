@@ -26,6 +26,66 @@
                     <ol id="posts-list" class="hfeed" start="9">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="/meta-programmingclass.html" rel="bookmark"
+                           title="Permalink to Meta programming(Class)">Meta programming(Class)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-03T17:51:04+08:00">
+                Published: 六 03 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>在Ruby中，使用class定义类时，实际上是在运行代码，这与java之类的静态语
+言有很大的差别。  <br />
+另外，类只是一个增强的模块，因此，任何适用于类的东西也
+适用于模块。
+<br>
+<img alt="Object Definitions" src="/images/ObjectDefinitions.png" />
+<br>
+ * 注1:在类(或模块)定义时，类本身充当了当前对象self的角色。</p>
+<div class="highlight"><pre><span class="n">result</span> <span class="o">=</span> <span class="k">class</span> <span class="nc">MyClass</span>
+  <span class="nb">self</span>
+<span class="k">end</span>
+
+<span class="n">result</span>     <span class="c1"># =&gt;  MyClass</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>注2:Ruby中总是存在一个当前对象self，与此类似，也总是存在一个当前类
+   （或模块）。每当通过class关键字来打开一个类时，这个类就成为当前类，
+   但是使用class关键字需要一个类的名字。
+   如果只有一个类的引用，需要用class_eval()方法打开这个类。</p>
+</li>
+<li>
+<p>注3：类实例变量仅仅是属于Class类对象的普通实例变量。它仅仅可以被类
+   本身所访问，而不能被类的实例或之类所访问。</p>
+</li>
+<li>
+<p>注4：类方法的实质，它们只是一个类的单件方法。</p>
+</li>
+<li>
+<p>注5: 在类定义中使用一个类方法。</p>
+</li>
+<li>
+<p>注6: eigenclass是一个对象特有的隐藏类，它是单件方法存在的地方。Ruby中可以使用如下语法进入eigenclass的作用域。</p>
+</li>
+</ul>
+<div class="highlight"><pre><span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="n">an_object</span> 
+  <span class="c1"># do ...</span></pre></div>
+                <a class="readmore" href="/meta-programmingclass.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="/metaprogrammingblock.html" rel="bookmark"
                            title="Permalink to Metaprogramming(Block)">Metaprogramming(Block)</a></h1>
                 </header>
@@ -243,17 +303,24 @@ Ruby是一门对元编程支持很强大的语言(只是比lisp弱一点)，而�
 ubuntu12.04 + emacs24 + leiningen2.3.4</p>
 <p>2.<strong>配置emacs</strong> <br />
   a.添加package地址，在<code>~/.emacs.d/init.el</code>中加入：   </p>
-<div class="highlight"><pre><span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">package</span><span class="p">)</span>
-<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">list</span> <span class="err">&#39;</span><span class="n">package</span><span class="o">-</span><span class="n">archives</span>
-             <span class="err">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="p">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
-<span class="p">(</span><span class="n">package</span><span class="o">-</span><span class="n">initialize</span><span class="p">)</span>
+<div class="highlight"><pre><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
+             <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="o">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
 </pre></div>
 
 
 <p>b.安装相关插件，在<code>~/.emacs.d/init.el</code>中加入：</p>
-<div class="highlight"><pre><span class="p">(</span><span class="n">defvar</span> <span class="n">my</span><span class="o">-</span><span class="n">packages</span> <span class="err">&#39;</span><span class="p">(</span><span class="n">starter</span><span class="o">-</span><span class="n">kit</span>
-                      <span class="n">starter</span><span class="o">-</span><span class="n">kit</span><span class="o">-</span><span class="n">lisp</span>
-                      <span class="n">starter</span><span class="o">-</span><span class="n">kit ...</span></pre></div>
+<div class="highlight"><pre><span class="p">(</span><span class="nb">defvar</span> <span class="nv">my-packages</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">starter-kit</span>
+                      <span class="nv">starter-kit-lisp</span>
+                      <span class="nv">starter-kit-bindings</span>
+                      <span class="nv">starter-kit-eshell</span>
+                      <span class="nv">clojure-mode</span>
+                      <span class="nv">clojure-test-mode</span>
+                      <span class="nv">cider</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">p</span> <span class="nv">my-packages</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">not ...</span></pre></div>
                 <a class="readmore" href="/configure-emacs-for-clojure.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -384,55 +451,6 @@ with语句是用来简化“try/finally”语句的，通常用于处理共享�
     <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">start ...</span></pre></div>
                 <a class="readmore" href="/context-manager-in-python.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/decroator-in-python.html" rel="bookmark"
-                           title="Permalink to Decroator in Python">Decroator in Python</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-03-14T15:00:56+08:00">
-                Published: 五 14 三月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
-        </address>
-<p>In <a href="/category/python.html">Python</a>.</p>
-
-</footer><!-- /.post-info -->                <p>装饰器的作用是在原有对象的基础上添加额外功能。python中可以将函数作为参
-数，进行装饰，返回经过修饰过的函数，比如：</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">print</span> <span class="s">&quot;*** wrapper ***&quot;</span>
-        <span class="n">fn</span><span class="p">()</span>
-        <span class="k">print</span> <span class="s">&quot;*** wrapper ***&quot;</span>
-    <span class="k">return</span> <span class="n">wrapper</span>
-
-<span class="k">def</span> <span class="nf">origin_fn</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&quot;--- origin ---&quot;</span>
-
-<span class="n">decorated_fn</span> <span class="o">=</span> <span class="n">decorator</span><span class="p">(</span><span class="n">origin_fn</span><span class="p">)</span>
-
-<span class="n">decorated_fn</span><span class="p">()</span>
-</pre></div>
-
-
-<p>python可以使用语法糖@来达到相同的作用，例子如下：</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">makebold</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s">&quot;&lt;b&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;&lt;/b&gt;&quot;</span>
-    <span class="k">return</span> <span class="n">wrapper</span>
-
-<span class="k">def</span> <span class="nf">makeitalic</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s">&quot;&lt;i&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;&lt;/i&gt;&quot;</span>
-    <span class="k">return ...</span></pre></div>
-                <a class="readmore" href="/decroator-in-python.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
