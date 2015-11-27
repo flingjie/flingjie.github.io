@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>A Pelican Blog</title><link href="/" rel="alternate"></link><link href="/feeds/emacs.atom.xml" rel="self"></link><id>/</id><updated>2014-03-29T10:39:00+00:00</updated><entry><title>Configure Emacs for clojure</title><link href="/configure-emacs-for-clojure.html" rel="alternate"></link><updated>2014-03-29T10:39:00+00:00</updated><author><name></name></author><id>tag:,2014-03-29:configure-emacs-for-clojure.html</id><summary type="html">&lt;p&gt;1.&lt;strong&gt;使用环境&lt;/strong&gt;：
+ubuntu12.04 + emacs24 + leiningen2.3.4&lt;/p&gt;
+&lt;p&gt;2.&lt;strong&gt;配置emacs&lt;/strong&gt; &lt;br /&gt;
+  a.添加package地址，在&lt;code&gt;~/.emacs.d/init.el&lt;/code&gt;中加入：   &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;package&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;package-archives&lt;/span&gt;
+             &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;marmalade&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;http://marmalade-repo.org/packages/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;package-initialize&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;b.安装相关插件，在&lt;code&gt;~/.emacs.d/init.el&lt;/code&gt;中加入：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defvar&lt;/span&gt; &lt;span class="nv"&gt;my-packages&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;starter-kit&lt;/span&gt;
+                      &lt;span class="nv"&gt;starter-kit-lisp&lt;/span&gt;
+                      &lt;span class="nv"&gt;starter-kit-bindings&lt;/span&gt;
+                      &lt;span class="nv"&gt;starter-kit-eshell&lt;/span&gt;
+                      &lt;span class="nv"&gt;clojure-mode&lt;/span&gt;
+                      &lt;span class="nv"&gt;clojure-test-mode&lt;/span&gt;
+                      &lt;span class="nv"&gt;cider&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;dolist&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;p&lt;/span&gt; &lt;span class="nv"&gt;my-packages&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;not&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;package-installed-p&lt;/span&gt; &lt;span class="nv"&gt;p&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;package-install&lt;/span&gt; &lt;span class="nv"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.&lt;strong&gt;编辑相关操作&lt;/strong&gt; &lt;br /&gt;
+a.文件、窗口操作&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;C-x C-f    打开文件
+C-x C-s    保存文件
+C-x b      切换buffer
+C-x k      关闭当前buffer
+C-x o      切换到下一buffer
+C-x 0      隐藏当前buffer
+C-x 1      隐藏其他buffer
+C-x 2      垂直分割窗口
+C-x 3      水平分割窗口
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;b.移动操作&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;C-a    移动到行头
+C-e    移动到行尾
+C-n    移动到下一行
+C-p    移动到上一行
+C-b    向后移动一个字符
+C-f    向前移动一个字符
+M-f    向前移动一个单词
+M-b    向后移动一个单词
+C-v    向下翻页
+M-v    向上翻页
+M-&amp;lt;    移动到buffer开头
+M-&amp;gt;    移动到buffer末尾
+C-M-f  移动到后一个括号
+C-M-f  移动到前一个括号
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;c.编辑操作&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;C-d        删除一个字符
+M-d        删除一个单词
+C-k        删除一行
+C-w        删除选中区域
+M-w        复制选中区域
+C-y        粘帖
+C-j        换行
+
+C-M-Space  选中光标所在的S表达式
+C-M-t      交换连个S表达式位置
+M-1 (      在当前S表达式外添加一对括号
+M-s        删除当前S表达式外的一对括号
+M-r        删除当前S表达式外的一对括号(包括内容)
+C-)        将后面的括号向后移动一个元素
+           (a b (c d) e f) -&amp;gt; (a b (c d e) f)
+C-}        将后面的括号向前移动一个元素
+           (a b (c d) e f) -&amp;gt; (a b (c) d e f)
+C-(        将前面的括号向前移动一个元素
+C-{        将前面的括号向后移动一个元素
+C-M-q      代码对齐
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;d.帮助操作&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;C-h b    查看当前的key绑定
+C-h m    查看当前的编辑模式
+C-h a    查找一个关键词的相关帮助
+C-h k    查看一个key的绑定
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4.&lt;strong&gt;编译相关操作&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;C-c M-j    cider-jack-in,启动nREPL
+C-c C-e    执行s表达式
+C-c C-r    执行当前选中区
+C-c C-z    运行lisp进程
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;5.&lt;strong&gt;宏操作&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;C-x (   ;;开始录制宏
+...     ;;输入操作
+C-x )   ;;结束录制
+C-x e   ;;执行宏
+&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>

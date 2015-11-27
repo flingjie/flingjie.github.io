@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>A Pelican Blog</title><link href="/" rel="alternate"></link><link href="/feeds/algorithm.atom.xml" rel="self"></link><id>/</id><updated>2014-04-22T18:10:18+00:00</updated><entry><title>A* Algorithm</title><link href="/a-algorithm.html" rel="alternate"></link><updated>2014-04-22T18:10:18+00:00</updated><author><name></name></author><id>tag:,2014-04-22:a-algorithm.html</id><summary type="html">&lt;p&gt;A*算法是一种经典的启发式搜索算法,公式表示为：f(n)=g(n)+h(n)，其中f(n)
+是从初始点到目标点的估价函数，g(n)是从初始点到节点n的代价，h(n)是从节
+点n到目标节点的估计代价，保证找到最短路径关键在于估价函数h(n)的选取。  &lt;br /&gt;
+一、几个相关知识：  &lt;br /&gt;
+&lt;strong&gt;启发式搜索&lt;/strong&gt;：启发式搜索就是在状态空间中的搜索对每一个搜索的位置进行评估，得到最好的位置，再从这个位置进行搜索直到目标。这样可以省略大量无畏的搜索路径，提到了效率。在启发式搜索中，对位置的估价是十分重要的。采用了不同的估价可以有不同的效果。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;估价函数&lt;/strong&gt;：从当前节点移动到目标节点的预估费用；这个估计就是启发式的。在寻路问题和迷宫问题中，我们通常用曼哈顿（manhattan）估价函数。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A*算法的特点&lt;/strong&gt;：A*算法在理论上是时间最优的，但是也有缺点：它的空间增长是指数级别的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A*算法与BFS&lt;/strong&gt;：可以这样说，BFS是A&lt;em&gt;算法的一个特例。对于一个BFS算法，从当前节点扩展出来的每一个节点（如果没有被访问过的话）都要放进队列进行进一步扩展。也就是说BFS的估计函数h永远等于0，没有一点启发式的信息，可以认为BFS是“最烂的”A&lt;/em&gt;算法。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IDA*算法&lt;/strong&gt;：这种算法被称为迭代加深A&lt;em&gt;算法，可以有效的解决A&lt;/em&gt;空间增长带来的问题，甚至可以不用到优先级队列。&lt;/p&gt;
+&lt;p&gt;二、A*伪代码&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="nx"&gt;push&lt;/span&gt; &lt;span class="nx"&gt;startNode&lt;/span&gt; &lt;span class="nx"&gt;onto&lt;/span&gt; &lt;span class="nx"&gt;openList&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;openList&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;not&lt;/span&gt; &lt;span class="nx"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;current&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;goal&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;path&lt;/span&gt;
+
+        &lt;span class="nx"&gt;remove&lt;/span&gt; &lt;span class="nx"&gt;currentNode&lt;/span&gt; &lt;span class="nx"&gt;from&lt;/span&gt; &lt;span class="nx"&gt;openList&lt;/span&gt;
+        &lt;span class="nx"&gt;push&lt;/span&gt; &lt;span class="nx"&gt;currentNode&lt;/span&gt; &lt;span class="nx"&gt;onto&lt;/span&gt; &lt;span class="nx"&gt;closedList&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nx"&gt;each&lt;/span&gt; &lt;span class="nx"&gt;neighbor&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;negighbors&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;neighbor&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;not&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;openList&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nx"&gt;save&lt;/span&gt; &lt;span class="nx"&gt;g&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;h&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;and&lt;/span&gt; &lt;span class="nx"&gt;f&lt;/span&gt;
+                &lt;span class="nx"&gt;save&lt;/span&gt; &lt;span class="nx"&gt;current&lt;/span&gt; &lt;span class="nx"&gt;parent&lt;/span&gt;
+                &lt;span class="nx"&gt;add&lt;/span&gt; &lt;span class="nx"&gt;neighbor&lt;/span&gt; &lt;span class="nx"&gt;to&lt;/span&gt; &lt;span class="nx"&gt;openList&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;neighbor&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;openList&lt;/span&gt;
+                &lt;span class="nx"&gt;And&lt;/span&gt; &lt;span class="nx"&gt;g&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;better&lt;/span&gt; &lt;span class="nx"&gt;than&lt;/span&gt; &lt;span class="nx"&gt;previous&lt;/span&gt; &lt;span class="nx"&gt;g&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nx"&gt;save&lt;/span&gt; &lt;span class="nx"&gt;g&lt;/span&gt; &lt;span class="nx"&gt;and&lt;/span&gt; &lt;span class="nx"&gt;f&lt;/span&gt;
+                &lt;span class="nx"&gt;save&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;current&lt;/span&gt; &lt;span class="nx"&gt;parent&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;三、coffeescript实现&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;astar =&lt;/span&gt;
+    &lt;span class="nv"&gt;init: &lt;/span&gt;&lt;span class="nf"&gt;(grid) -&amp;gt;&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;&lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;&lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nv"&gt;f = &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+                &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nv"&gt;g = &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+                &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nv"&gt;h = &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+                &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nv"&gt;debug = &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+                &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nv"&gt;parent = &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;
+
+    &lt;span class="nv"&gt;search: &lt;/span&gt;&lt;span class="nf"&gt;(grid, start, end) -&amp;gt;&lt;/span&gt;
+        &lt;span class="nx"&gt;astar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;init&lt;/span&gt; &lt;span class="nx"&gt;grid&lt;/span&gt;
+
+        &lt;span class="nv"&gt;openList = &lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="nv"&gt;closeList = &lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="nx"&gt;openList&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt; &lt;span class="nx"&gt;start&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nx"&gt;openList&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# 获取最小的f(x)的点&lt;/span&gt;
+            &lt;span class="nv"&gt;lowInd = &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;&lt;span class="nx"&gt;openList&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="nv"&gt;lowInd = &lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;openList&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;f&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;openList&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;lowInd&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nx"&gt;f&lt;/span&gt;
+            &lt;span class="nv"&gt;currentNode = &lt;/span&gt;&lt;span class="nx"&gt;openList&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;lowInd&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# 到达目标点，返回路径&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;currentNode&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;pos&lt;/span&gt; &lt;span class="o"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;end&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;pos&lt;/span&gt;
+                &lt;span class="nv"&gt;curr = &lt;/span&gt;&lt;span class="nx"&gt;currentNode&lt;/span&gt;
+                &lt;span class="nv"&gt;ret = &lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt;
+                &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nx"&gt;curr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parent&lt;/span&gt;
+                    &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt; &lt;span class="nx"&gt;curr&lt;/span&gt;
+                    &lt;span class="nv"&gt;curr = &lt;/span&gt;&lt;span class="nx"&gt;curr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parent&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;reverse&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# 最短路径搜索过程&lt;/span&gt;
+            &lt;span class="c1"&gt;# 将当前点从openList移至closeList&lt;/span&gt;
+            &lt;span class="c1"&gt;# 处理当前点的每个相邻点&lt;/span&gt;
+            &lt;span class="nx"&gt;openList&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;removeGraphNode&lt;/span&gt; &lt;span class="nx"&gt;currentNode&lt;/span&gt;
+            &lt;span class="nx"&gt;closeList&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt; &lt;span class="nx"&gt;currentNode&lt;/span&gt;
+            &lt;span class="nv"&gt;neightbors = &lt;/span&gt;&lt;span class="nx"&gt;astar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;neighbors&lt;/span&gt; &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;currentNode&lt;/span&gt;
+
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;&lt;span class="nx"&gt;neighbors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="nv"&gt;neighbor = &lt;/span&gt;&lt;span class="nx"&gt;neighbor&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;closeList&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;findGraphNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;neighbor&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;or&lt;/span&gt; &lt;span class="nx"&gt;neighbor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;isWall&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+                    &lt;span class="c1"&gt;# 无效点，跳至下一个相邻点&lt;/span&gt;
+                    &lt;span class="k"&gt;continue&lt;/span&gt;
+
+                &lt;span class="c1"&gt;# gScore 是起始点到当前点所经过的距离&lt;/span&gt;
+                &lt;span class="c1"&gt;# 需要判断当前相邻是否是最短距离&lt;/span&gt;
+                &lt;span class="nv"&gt;gScore = &lt;/span&gt;&lt;span class="nx"&gt;currentNode&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;g&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="c1"&gt;# 1是当前点到相邻点的距离&lt;/span&gt;
+                &lt;span class="nv"&gt;gScoreIsBest = &lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;
+
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nx"&gt;openList&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;findGraphNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;neighbor&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="c1"&gt;# 第一次到达当前点， 它必是当前最短距离&lt;/span&gt;
+                    &lt;span class="c1"&gt;# 并且，需要计算 h(x) &lt;/span&gt;
+                    &lt;span class="nv"&gt;gScoreIsBest = &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;
+                    &lt;span class="nv"&gt;neighbor.h = &lt;/span&gt;&lt;span class="nx"&gt;astar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;heuristic&lt;/span&gt; &lt;span class="nx"&gt;neighbor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;end&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;pos&lt;/span&gt;
+                    &lt;span class="nx"&gt;openList&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt; &lt;span class="nx"&gt;neighbor&lt;/span&gt;
+                &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;gScore&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;neighbor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;g&lt;/span&gt;
+                    &lt;span class="c1"&gt;# 已经到达过该点，并且路径短于上次&lt;/span&gt;
+                    &lt;span class="nv"&gt;gScoreIsBest = &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;
+
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;gScoreIsBest&lt;/span&gt;
+                    &lt;span class="c1"&gt;# 找到当前的最短路径，将它保存起来&lt;/span&gt;
+                    &lt;span class="nv"&gt;neighbor.parent = &lt;/span&gt;&lt;span class="nx"&gt;currentNode&lt;/span&gt;
+                    &lt;span class="nv"&gt;neighbor.g = &lt;/span&gt;&lt;span class="nx"&gt;gScore&lt;/span&gt;
+                    &lt;span class="nv"&gt;neighbor.f = &lt;/span&gt;&lt;span class="nx"&gt;neighbor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;g&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;neighbor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;h&lt;/span&gt;
+                    &lt;span class="nv"&gt;neighbor.debug = &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;F: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;neighbor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;f&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+                        &lt;span class="s"&gt;&amp;quot;&amp;lt;br/&amp;gt;G: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;neighbor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;g&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;br/&amp;gt;H:&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;neighbor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;h&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# 未找到最短路径，返回空&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+    &lt;span class="nv"&gt;heuristic: &lt;/span&gt;&lt;span class="nf"&gt;(pos0, pos1) -&amp;gt;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;pos1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;pos0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;pos1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;pos0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="nv"&gt;neighbors: &lt;/span&gt;&lt;span class="nf"&gt;(grid, node) -&amp;gt;&lt;/span&gt;
+        &lt;span class="nv"&gt;ret = &lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="nv"&gt;x = &lt;/span&gt;&lt;span class="nx"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;
+        &lt;span class="nv"&gt;y = &lt;/span&gt;&lt;span class="nx"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;
+
+        &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt; &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt; 
+        &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt; &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt; 
+        &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt; &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt; 
+        &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt; &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;参考： &lt;br /&gt;
+&lt;a href="http://en.wikipedia.org/wiki/A*_search_algorithm#Algorithm_description"&gt;A* search algorithm description on wiki&lt;/a&gt; &lt;br /&gt;
+&lt;a href="http://www.briangrinstead.com/blog/astar-search-algorithm-in-javascript"&gt;astar-search-algorithm-in-javascript&lt;/a&gt; &lt;br /&gt;
+&lt;a href="http://qiao.github.io/PathFinding.js/visual/"&gt;vistual PathFinding.js&lt;/a&gt;  &lt;br /&gt;
+&lt;a href="http://www.cppblog.com/mythit/archive/2009/04/19/80492.aspx"&gt;A*算法入门&lt;/a&gt;&lt;/p&gt;</summary></entry></feed>

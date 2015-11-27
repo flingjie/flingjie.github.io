@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>A Pelican Blog</title><link href="/" rel="alternate"></link><link href="/feeds/https.atom.xml" rel="self"></link><id>/</id><updated>2015-10-10T16:35:59+00:00</updated><entry><title>Configure Https</title><link href="/configure-https.html" rel="alternate"></link><updated>2015-10-10T16:35:59+00:00</updated><author><name></name></author><id>tag:,2015-10-10:configure-https.html</id><summary type="html">&lt;p&gt;Https just means "http with ssl". In order to enable SSL, we need a
+certificate which is either self-signed or signed by an external
+Cerificate Authority. A self-signed certificate need to be imported
+when browsing. For easy-to-use purposes, use an external cerificate
+here. &lt;a href="http://www.startssl.com/"&gt;http://www.startssl.com/&lt;/a&gt; and
+&lt;a href="https://buy.wosign.com/"&gt;https://buy.wosign.com/&lt;/a&gt; are two sites for
+buying cerificate. I use
+&lt;a href="https://buy.wosign.com/"&gt;https://buy.wosign.com/&lt;/a&gt; here.&lt;/p&gt;
+&lt;p&gt;For e-commerce websites, use OV(Organization Verified) SSL. For
+financial websites, use EV(Extended Verified) SSL.&lt;/p&gt;
+&lt;h5&gt;Enable in Nginx&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;server {
+    listen 443 ssl;
+
+    server_name example.com;    
+    ssl_certificate /etc/ssl/private/example.com_bundle.crt;
+    ssl_certificate_key /etc/ssl/private/example.com.key;
+
+    ...
+}
+&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
