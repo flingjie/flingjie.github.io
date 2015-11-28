@@ -16,7 +16,6 @@
                 <nav><ul>
                     <li><a href="/archives.html">Archives</a></li>
                     <li><a href="/category/algorithm.html">Algorithm</a></li>
-                    <li><a href="/category/clojure.html">Clojure</a></li>
                     <li><a href="/category/emacs.html">Emacs</a></li>
                     <li><a href="/category/note.html">Note</a></li>
                     <li><a href="/category/python.html">Python</a></li>
@@ -45,25 +44,25 @@
 ubuntu12.04 + emacs24 + leiningen2.3.4</p>
 <p>2.<strong>配置emacs</strong> <br />
   a.添加package地址，在<code>~/.emacs.d/init.el</code>中加入：   </p>
-<div class="highlight"><pre><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
-<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-             <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="o">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
-<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+<div class="highlight"><pre><span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">package</span><span class="p">)</span>
+<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">list</span> <span class="err">&#39;</span><span class="n">package</span><span class="o">-</span><span class="n">archives</span>
+             <span class="err">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="p">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="n">package</span><span class="o">-</span><span class="n">initialize</span><span class="p">)</span>
 </pre></div>
 
 
 <p>b.安装相关插件，在<code>~/.emacs.d/init.el</code>中加入：</p>
-<div class="highlight"><pre><span class="p">(</span><span class="nb">defvar</span> <span class="nv">my-packages</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">starter-kit</span>
-                      <span class="nv">starter-kit-lisp</span>
-                      <span class="nv">starter-kit-bindings</span>
-                      <span class="nv">starter-kit-eshell</span>
-                      <span class="nv">clojure-mode</span>
-                      <span class="nv">clojure-test-mode</span>
-                      <span class="nv">cider</span><span class="p">))</span>
+<div class="highlight"><pre><span class="p">(</span><span class="n">defvar</span> <span class="n">my</span><span class="o">-</span><span class="n">packages</span> <span class="err">&#39;</span><span class="p">(</span><span class="n">starter</span><span class="o">-</span><span class="n">kit</span>
+                      <span class="n">starter</span><span class="o">-</span><span class="n">kit</span><span class="o">-</span><span class="n">lisp</span>
+                      <span class="n">starter</span><span class="o">-</span><span class="n">kit</span><span class="o">-</span><span class="n">bindings</span>
+                      <span class="n">starter</span><span class="o">-</span><span class="n">kit</span><span class="o">-</span><span class="n">eshell</span>
+                      <span class="n">clojure</span><span class="o">-</span><span class="n">mode</span>
+                      <span class="n">clojure</span><span class="o">-</span><span class="n">test</span><span class="o">-</span><span class="n">mode</span>
+                      <span class="n">cider</span><span class="p">))</span>
 
-<span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">p</span> <span class="nv">my-packages</span><span class="p">)</span>
-  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="nv">p</span><span class="p">))</span>
-    <span class="p">(</span><span class="nv">package-install</span> <span class="nv">p</span><span class="p">)))</span>
+<span class="p">(</span><span class="n">dolist</span> <span class="p">(</span><span class="n">p</span> <span class="n">my</span><span class="o">-</span><span class="n">packages</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">when</span> <span class="p">(</span><span class="n">not</span> <span class="p">(</span><span class="n">package</span><span class="o">-</span><span class="n">installed</span><span class="o">-</span><span class="n">p</span> <span class="n">p</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">package</span><span class="o">-</span><span class="n">install</span> <span class="n">p</span><span class="p">)))</span>
 </pre></div>
 
 
@@ -82,68 +81,68 @@ C-x 3      水平分割窗口
 
 
 <p>b.移动操作</p>
-<div class="highlight"><pre>C-a    移动到行头
-C-e    移动到行尾
-C-n    移动到下一行
-C-p    移动到上一行
-C-b    向后移动一个字符
-C-f    向前移动一个字符
-M-f    向前移动一个单词
-M-b    向后移动一个单词
-C-v    向下翻页
-M-v    向上翻页
-M-&lt;    移动到buffer开头
-M-&gt;    移动到buffer末尾
-C-M-f  移动到后一个括号
-C-M-f  移动到前一个括号
+<div class="highlight"><pre><span class="n">C</span><span class="o">-</span><span class="n">a</span>    <span class="err">移动到行头</span>
+<span class="n">C</span><span class="o">-</span><span class="n">e</span>    <span class="err">移动到行尾</span>
+<span class="n">C</span><span class="o">-</span><span class="n">n</span>    <span class="err">移动到下一行</span>
+<span class="n">C</span><span class="o">-</span><span class="n">p</span>    <span class="err">移动到上一行</span>
+<span class="n">C</span><span class="o">-</span><span class="n">b</span>    <span class="err">向后移动一个字符</span>
+<span class="n">C</span><span class="o">-</span><span class="n">f</span>    <span class="err">向前移动一个字符</span>
+<span class="n">M</span><span class="o">-</span><span class="n">f</span>    <span class="err">向前移动一个单词</span>
+<span class="n">M</span><span class="o">-</span><span class="n">b</span>    <span class="err">向后移动一个单词</span>
+<span class="n">C</span><span class="o">-</span><span class="n">v</span>    <span class="err">向下翻页</span>
+<span class="n">M</span><span class="o">-</span><span class="n">v</span>    <span class="err">向上翻页</span>
+<span class="n">M</span><span class="o">-&lt;</span>    <span class="err">移动到</span><span class="n">buffer</span><span class="err">开头</span>
+<span class="n">M</span><span class="o">-&gt;</span>    <span class="err">移动到</span><span class="n">buffer</span><span class="err">末尾</span>
+<span class="n">C</span><span class="o">-</span><span class="n">M</span><span class="o">-</span><span class="n">f</span>  <span class="err">移动到后一个括号</span>
+<span class="n">C</span><span class="o">-</span><span class="n">M</span><span class="o">-</span><span class="n">f</span>  <span class="err">移动到前一个括号</span>
 </pre></div>
 
 
 <p>c.编辑操作</p>
-<div class="highlight"><pre>C-d        删除一个字符
-M-d        删除一个单词
-C-k        删除一行
-C-w        删除选中区域
-M-w        复制选中区域
-C-y        粘帖
-C-j        换行
+<div class="highlight"><pre><span class="n">C</span><span class="o">-</span><span class="n">d</span>        <span class="err">删除一个字符</span>
+<span class="n">M</span><span class="o">-</span><span class="n">d</span>        <span class="err">删除一个单词</span>
+<span class="n">C</span><span class="o">-</span><span class="n">k</span>        <span class="err">删除一行</span>
+<span class="n">C</span><span class="o">-</span><span class="n">w</span>        <span class="err">删除选中区域</span>
+<span class="n">M</span><span class="o">-</span><span class="n">w</span>        <span class="err">复制选中区域</span>
+<span class="n">C</span><span class="o">-</span><span class="n">y</span>        <span class="err">粘帖</span>
+<span class="n">C</span><span class="o">-</span><span class="n">j</span>        <span class="err">换行</span>
 
-C-M-Space  选中光标所在的S表达式
-C-M-t      交换连个S表达式位置
-M-1 (      在当前S表达式外添加一对括号
-M-s        删除当前S表达式外的一对括号
-M-r        删除当前S表达式外的一对括号(包括内容)
-C-)        将后面的括号向后移动一个元素
-           (a b (c d) e f) -&gt; (a b (c d e) f)
-C-}        将后面的括号向前移动一个元素
-           (a b (c d) e f) -&gt; (a b (c) d e f)
-C-(        将前面的括号向前移动一个元素
-C-{        将前面的括号向后移动一个元素
-C-M-q      代码对齐
+<span class="n">C</span><span class="o">-</span><span class="n">M</span><span class="o">-</span><span class="n">Space</span>  <span class="err">选中光标所在的</span><span class="n">S</span><span class="err">表达式</span>
+<span class="n">C</span><span class="o">-</span><span class="n">M</span><span class="o">-</span><span class="n">t</span>      <span class="err">交换连个</span><span class="n">S</span><span class="err">表达式位置</span>
+<span class="n">M</span><span class="o">-</span><span class="mi">1</span> <span class="p">(</span>      <span class="err">在当前</span><span class="n">S</span><span class="err">表达式外添加一对括号</span>
+<span class="n">M</span><span class="o">-</span><span class="n">s</span>        <span class="err">删除当前</span><span class="n">S</span><span class="err">表达式外的一对括号</span>
+<span class="n">M</span><span class="o">-</span><span class="n">r</span>        <span class="err">删除当前</span><span class="n">S</span><span class="err">表达式外的一对括号</span><span class="p">(</span><span class="err">包括内容</span><span class="p">)</span>
+<span class="n">C</span><span class="o">-</span><span class="p">)</span>        <span class="err">将后面的括号向后移动一个元素</span>
+           <span class="p">(</span><span class="n">a</span> <span class="n">b</span> <span class="p">(</span><span class="n">c</span> <span class="n">d</span><span class="p">)</span> <span class="n">e</span> <span class="n">f</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="n">b</span> <span class="p">(</span><span class="n">c</span> <span class="n">d</span> <span class="n">e</span><span class="p">)</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">C</span><span class="o">-</span><span class="p">}</span>        <span class="err">将后面的括号向前移动一个元素</span>
+           <span class="p">(</span><span class="n">a</span> <span class="n">b</span> <span class="p">(</span><span class="n">c</span> <span class="n">d</span><span class="p">)</span> <span class="n">e</span> <span class="n">f</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="n">b</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">C</span><span class="o">-</span><span class="p">(</span>        <span class="err">将前面的括号向前移动一个元素</span>
+<span class="n">C</span><span class="o">-</span><span class="p">{</span>        <span class="err">将前面的括号向后移动一个元素</span>
+<span class="n">C</span><span class="o">-</span><span class="n">M</span><span class="o">-</span><span class="n">q</span>      <span class="err">代码对齐</span>
 </pre></div>
 
 
 <p>d.帮助操作</p>
-<div class="highlight"><pre>C-h b    查看当前的key绑定
-C-h m    查看当前的编辑模式
-C-h a    查找一个关键词的相关帮助
-C-h k    查看一个key的绑定
+<div class="highlight"><pre><span class="n">C</span><span class="o">-</span><span class="n">h</span> <span class="n">b</span>    <span class="err">查看当前的</span><span class="n">key</span><span class="err">绑定</span>
+<span class="n">C</span><span class="o">-</span><span class="n">h</span> <span class="n">m</span>    <span class="err">查看当前的编辑模式</span>
+<span class="n">C</span><span class="o">-</span><span class="n">h</span> <span class="n">a</span>    <span class="err">查找一个关键词的相关帮助</span>
+<span class="n">C</span><span class="o">-</span><span class="n">h</span> <span class="n">k</span>    <span class="err">查看一个</span><span class="n">key</span><span class="err">的绑定</span>
 </pre></div>
 
 
 <p>4.<strong>编译相关操作</strong></p>
-<div class="highlight"><pre>C-c M-j    cider-jack-in,启动nREPL
-C-c C-e    执行s表达式
-C-c C-r    执行当前选中区
-C-c C-z    运行lisp进程
+<div class="highlight"><pre><span class="n">C</span><span class="o">-</span><span class="n">c</span> <span class="n">M</span><span class="o">-</span><span class="n">j</span>    <span class="n">cider</span><span class="o">-</span><span class="n">jack</span><span class="o">-</span><span class="n">in</span><span class="p">,</span><span class="err">启动</span><span class="n">nREPL</span>
+<span class="n">C</span><span class="o">-</span><span class="n">c</span> <span class="n">C</span><span class="o">-</span><span class="n">e</span>    <span class="err">执行</span><span class="n">s</span><span class="err">表达式</span>
+<span class="n">C</span><span class="o">-</span><span class="n">c</span> <span class="n">C</span><span class="o">-</span><span class="n">r</span>    <span class="err">执行当前选中区</span>
+<span class="n">C</span><span class="o">-</span><span class="n">c</span> <span class="n">C</span><span class="o">-</span><span class="n">z</span>    <span class="err">运行</span><span class="n">lisp</span><span class="err">进程</span>
 </pre></div>
 
 
 <p>5.<strong>宏操作</strong></p>
-<div class="highlight"><pre>C-x (   ;;开始录制宏
-...     ;;输入操作
-C-x )   ;;结束录制
-C-x e   ;;执行宏
+<div class="highlight"><pre><span class="n">C</span><span class="o">-</span><span class="n">x</span> <span class="p">(</span>   <span class="p">;;</span><span class="err">开始录制宏</span>
+<span class="p">...</span>     <span class="p">;;</span><span class="err">输入操作</span>
+<span class="n">C</span><span class="o">-</span><span class="n">x</span> <span class="p">)</span>   <span class="p">;;</span><span class="err">结束录制</span>
+<span class="n">C</span><span class="o">-</span><span class="n">x</span> <span class="n">e</span>   <span class="p">;;</span><span class="err">执行宏</span>
 </pre></div>
     </div><!-- /.entry-content -->
 

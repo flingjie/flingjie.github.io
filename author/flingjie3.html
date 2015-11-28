@@ -16,7 +16,6 @@
                 <nav><ul>
                     <li><a href="/archives.html">Archives</a></li>
                     <li><a href="/category/algorithm.html">Algorithm</a></li>
-                    <li><a href="/category/clojure.html">Clojure</a></li>
                     <li><a href="/category/emacs.html">Emacs</a></li>
                     <li><a href="/category/note.html">Note</a></li>
                     <li><a href="/category/python.html">Python</a></li>
@@ -25,6 +24,55 @@
 
                 <section id="content" class="body">
                     <ol id="posts-list" class="hfeed" start="9">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/context-manager-in-python.html" rel="bookmark"
+                           title="Permalink to Context manager in Python">Context manager in Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-14T17:13:46+08:00">
+                Published: 五 14 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/python.html">Python</a>.</p>
+
+</footer><!-- /.post-info -->                <p>上下文管理器(context manager)是Python2.5开始支持的一种语法，用于处理指
+定代码块进入和退出时的操作。一般使用with语法，也可以直接调用相应的方法。</p>
+<p><strong>with语句</strong> <br />
+with语句是用来简化“try/finally”语句的，通常用于处理共享资源的获取和
+释放，比如文件、数据库和线程资源。它的用法如下：</p>
+<div class="highlight"><pre><span class="k">with</span> <span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span><span class="p">:</span>
+    <span class="n">BLOCK</span>
+</pre></div>
+
+
+<p>其相当于进行了如下操作：</p>
+<div class="highlight"><pre><span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span>
+<span class="n">VAR</span><span class="o">.</span><span class="n">__enter__</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">BLOCK</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">VAR</span><span class="o">.</span><span class="n">__exit__</span><span class="p">()</span>
+</pre></div>
+
+
+<p>例子如下：</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
+<span class="k">class</span> <span class="nc">demo</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">label</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
+
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start ...</span></pre></div>
+                <a class="readmore" href="/context-manager-in-python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
             <li><article class="hentry">
                 <header>
                     <h1><a href="/decroator-in-python.html" rel="bookmark"
