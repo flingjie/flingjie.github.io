@@ -26,6 +26,42 @@
                     <ol id="posts-list" class="hfeed" start="9">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="/description-in-python.html" rel="bookmark"
+                           title="Permalink to Description in Python">Description in Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-15T16:27:32+08:00">
+                Published: 六 15 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/python.html">Python</a>.</p>
+
+</footer><!-- /.post-info -->                <p>在python中一个描述器就是定义下面的方法中一个或多个的一个对象：</p>
+<div class="highlight"><pre><span class="n">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span><span class="n">t</span>
+<span class="n">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="n">__delete__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
+</pre></div>
+
+
+<p>如果一个对象同时定义了<code>__get__()</code>和<code>__set__()</code>，它叫做资料描述器。只定义了<code>__get__()</code>的描述器叫做非资料描述器(一般用于方法)。
+资料描述器和非资料描述器的区别在于：相对于实例字典的优先级。如果实例字典中有与资料描述器同名的属性，优先使用资料描述器中的；如果实例字典中有与非资料描述器中同名的属性，优先使用实例字典中的。即优先级 资料描述器 &gt; 实例字典 &gt; 非资料描述器。 <br />
+要想写一个只读的资料描述器，只需同时定义<code>__get__()</code>和<code>__set__()</code>并在<code>__set__()</code>中抛出一个<code>AttributeError</code>。</p>
+<p><strong>描述器的调用</strong> <br />
+描述器可以直接这么调用：<code>descriptor.__get__(obj)</code>，不过一般都是用来拦截对实例属性的访问。 <br />
+描述器的调用规则如下：   </p>
+<ul>
+<li><code>__get__(self ...</code></li></ul>
+                <a class="readmore" href="/description-in-python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="/context-manager-in-python.html" rel="bookmark"
                            title="Permalink to Context manager in Python">Context manager in Python</a></h1>
                 </header>
