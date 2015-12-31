@@ -27,6 +27,50 @@
                     <ol id="posts-list" class="hfeed" start="9">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="/recursive-clojure.html" rel="bookmark"
+                           title="Permalink to Recursive Clojure">Recursive Clojure</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-18T21:23:52+08:00">
+                Published: 二 18 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/clojure.html">Clojure</a>.</p>
+
+</footer><!-- /.post-info -->                <p>一般函数可以通过调用自身来实现递归的效果，但这种方式会消耗栈有导致栈
+溢出。比如下面这个计算阶乘的例子：</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">recur-fac</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="mi">1</span> <span class="nv">n</span><span class="p">)</span>
+        <span class="mi">1</span>
+        <span class="p">(</span><span class="nb">* </span><span class="nv">n</span> <span class="p">(</span><span class="nf">recur-fac</span> <span class="p">(</span><span class="nb">dec </span><span class="nv">n</span><span class="p">)))))</span>
+</pre></div>
+
+
+<p>通常，可以改写成尾递归的方式来避免消耗栈导致栈溢出，改写如下：</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">recur-fac</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">letfn</span> <span class="p">[(</span><span class="nf">fac</span> <span class="p">[</span><span class="nv">c</span> <span class="nv">r</span><span class="p">]</span>
+                <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="mi">0</span> <span class="nv">c</span><span class="p">)</span>
+                    <span class="nv">r</span>
+                    <span class="p">(</span><span class="nf">fac</span> <span class="p">(</span><span class="nb">dec </span><span class="nv">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">* </span><span class="nv">c</span> <span class="nv">r</span><span class="p">))))]</span>
+    <span class="p">(</span><span class="nf">fac</span> <span class="nv">n</span> <span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>上面的写法使用了尾递归，在common lisp的语言中可以达到尾递归优化(TCO)，
+问题是clojure是基于JVM，无法支持完全的TCO，这主要是Java的安全模型决定
+的。还好Clojue也支持同一个函数体直接调用自身的TCO，只是要使用clojure的
+特殊形式，即使用recur关键字。改写如下 ...</p>
+                <a class="readmore" href="/recursive-clojure.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="/description-in-python.html" rel="bookmark"
                            title="Permalink to Description in Python">Description in Python</a></h1>
                 </header>

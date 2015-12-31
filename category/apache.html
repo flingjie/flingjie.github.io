@@ -2,7 +2,7 @@
 <html lang="ch">
 <head>
         <meta charset="utf-8" />
-        <title>Jie's Blog</title>
+        <title>Jie's Blog - Apache</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -22,19 +22,63 @@
                     <li><a href="/category/python.html">Python</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-<ul>
-    <li><a href="/category/algorithm.html">Algorithm</a></li>
-    <li><a href="/category/apache.html">Apache</a></li>
-    <li><a href="/category/clojure.html">Clojure</a></li>
-    <li><a href="/category/emacs.html">emacs</a></li>
-    <li><a href="/category/https.html">Https</a></li>
-    <li><a href="/category/javascript.html">Javascript</a></li>
-    <li><a href="/category/misc.html">misc</a></li>
-    <li><a href="/category/note.html">Note</a></li>
-    <li><a href="/category/python.html">Python</a></li>
-    <li><a href="/category/ruby.html">Ruby</a></li>
-    <li><a href="/category/vim.html">Vim</a></li>
-</ul>
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/apachekai-qi-8080duan-kou.html">Apache开启8080端口</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-12-31T11:10:40+08:00">
+                Published: 四 31 十二月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/apache.html">Apache</a>.</p>
+
+</footer><!-- /.post-info --><p>环境: 阿里云Centos+Apache+wordpress</p>
+<h3>1.Apache启用8080端口</h3>
+<p><strong>添加8080监听</strong></p>
+<div class="highlight"><pre># vim /usr/local/apache2/conf/httpd.confconf
+</pre></div>
+
+
+<p>在<code>Listen 80</code>后加入<code>Listen 8080</code></p>
+<div class="highlight"><pre>...
+Listen 80
+
+# add here
+Listen 8080
+</pre></div>
+
+
+<p><strong>配置服务器</strong></p>
+<div class="highlight"><pre># vim /usr/local/apache2/conf/extra/httpd-vhosts.conf 
+</pre></div>
+
+
+<p>添加网站:</p>
+<div class="highlight"><pre>...
+<span class="nt">&lt;VirtualHost</span> <span class="err">*:8080</span><span class="nt">&gt;</span>
+    # ServerAdmin webmaster@dummy-host2.example.com
+    DocumentRoot &quot;/var/web2&quot;
+    ServerName example.com
+    ErrorLog &quot;logs/example.com-error_log&quot;
+    CustomLog &quot;logs/example.com-access_log&quot; common
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+
+
+<h3>2. 重启Apache</h3>
+<div class="highlight"><pre># service httpd restart
+</pre></div>
+
+
+<h3>3. 检查8080端口</h3>
+<div class="highlight"><pre># netstat -an | grep 8080
+tcp        0      0 0.0.0.0:8080                0.0.0.0:*                   LISTEN
+</pre></div>                </article>
+            </aside><!-- /#featured -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
