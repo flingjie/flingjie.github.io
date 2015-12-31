@@ -16,6 +16,7 @@
                 <nav><ul>
                     <li><a href="/archives.html">Archives</a></li>
                     <li><a href="/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="/category/clojure.html">Clojure</a></li>
                     <li><a href="/category/emacs.html">Emacs</a></li>
                     <li><a href="/category/note.html">Note</a></li>
                     <li><a href="/category/python.html">Python</a></li>
@@ -398,17 +399,24 @@ Ruby是一门对元编程支持很强大的语言(只是比lisp弱一点)，而�
 ubuntu12.04 + emacs24 + leiningen2.3.4</p>
 <p>2.<strong>配置emacs</strong> <br />
   a.添加package地址，在<code>~/.emacs.d/init.el</code>中加入：   </p>
-<div class="highlight"><pre><span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">package</span><span class="p">)</span>
-<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">list</span> <span class="err">&#39;</span><span class="n">package</span><span class="o">-</span><span class="n">archives</span>
-             <span class="err">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="p">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
-<span class="p">(</span><span class="n">package</span><span class="o">-</span><span class="n">initialize</span><span class="p">)</span>
+<div class="highlight"><pre><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
+             <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="o">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
 </pre></div>
 
 
 <p>b.安装相关插件，在<code>~/.emacs.d/init.el</code>中加入：</p>
-<div class="highlight"><pre><span class="p">(</span><span class="n">defvar</span> <span class="n">my</span><span class="o">-</span><span class="n">packages</span> <span class="err">&#39;</span><span class="p">(</span><span class="n">starter</span><span class="o">-</span><span class="n">kit</span>
-                      <span class="n">starter</span><span class="o">-</span><span class="n">kit</span><span class="o">-</span><span class="n">lisp</span>
-                      <span class="n">starter</span><span class="o">-</span><span class="n">kit ...</span></pre></div>
+<div class="highlight"><pre><span class="p">(</span><span class="nb">defvar</span> <span class="nv">my-packages</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">starter-kit</span>
+                      <span class="nv">starter-kit-lisp</span>
+                      <span class="nv">starter-kit-bindings</span>
+                      <span class="nv">starter-kit-eshell</span>
+                      <span class="nv">clojure-mode</span>
+                      <span class="nv">clojure-test-mode</span>
+                      <span class="nv">cider</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">p</span> <span class="nv">my-packages</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">not ...</span></pre></div>
                 <a class="readmore" href="/configure-emacs-for-clojure.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
