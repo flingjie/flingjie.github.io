@@ -16,7 +16,6 @@
                 <nav><ul>
                     <li><a href="/archives.html">Archives</a></li>
                     <li><a href="/category/algorithm.html">Algorithm</a></li>
-                    <li><a href="/category/clojure.html">Clojure</a></li>
                     <li><a href="/category/emacs.html">Emacs</a></li>
                     <li><a href="/category/note.html">Note</a></li>
                     <li><a href="/category/python.html">Python</a></li>
@@ -25,6 +24,101 @@
 
                 <section id="content" class="body">
                     <ol id="posts-list" class="hfeed" start="9">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/vim-for-rails.html" rel="bookmark"
+                           title="Permalink to Vim for Rails">Vim for Rails</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-27T01:35:30+08:00">
+                Published: 二 27 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/vim.html">Vim</a>.</p>
+
+</footer><!-- /.post-info -->                <p>使用vim来进行Rails开发，对配置过程略做记录，前提vim已安装完毕。 <br />
+1、 <strong>安装pathogen</strong> <br />
+pathogens是vim的插件管理工具，可简化对vim插件的管理。 <br />
+安装如下：</p>
+<div class="highlight"><pre>mkdir -p ~/.vim/autoload ~/.vim/bundle; \
+curl -LSso ~/.vim/autoload/pathogen.vim \
+    https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim;
+</pre></div>
+
+
+<p>然后在<code>.vimrc</code>中加入：</p>
+<div class="highlight"><pre>execute pathogen#infect()
+&quot; 加在下列配置之前
+syntax on
+filetype plugin indent on
+</pre></div>
+
+
+<p>2、 <strong>rails.vim</strong> <br />
+rails插件，无需多介绍。 <br />
+常用快捷键:</p>
+<div class="highlight"><pre>gf ...</pre></div>
+                <a class="readmore" href="/vim-for-rails.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/metaprogrammingcode-generator.html" rel="bookmark"
+                           title="Permalink to Metaprogramming(code generator)">Metaprogramming(code generator)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-05-03T19:23:53+08:00">
+                Published: 六 03 五月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/ruby.html">Ruby</a>.</p>
+
+</footer><!-- /.post-info -->                <p>根本没有什么元编程，只有编程！？
+<br>
+<img alt="CodeWriter" src="/images/CodeWriter.png" />
+<br></p>
+<ul>
+<li>
+<p>注1: 由于代码字符串和块非常相似，因此，在很多情况下，可以选择使用任
+  意一种。但是，一般情况下，只要能用块就尽量用块。</p>
+</li>
+<li>
+<p>注2: 使一个模块可以通过钩子方法扩展它的包含者。</p>
+</li>
+</ul>
+<div class="highlight"><pre><span class="k">module</span> <span class="nn">M</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+    <span class="n">base</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="no">ClassMethods</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">module</span> <span class="nn">ClassMethods</span>
+    <span class="k">def</span> <span class="nf">my_method</span>
+      <span class="s1">&#39;a class method&#39;</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">C</span>
+  <span class="kp">include</span> <span class="n">M</span>
+<span class="k">end</span>
+
+<span class="n">C</span><span class="o">.</span><span class="n">my_method</span>   <span class="c1"># =&gt;  &quot;a class method&quot;</span>
+</pre></div>
+                <a class="readmore" href="/metaprogrammingcode-generator.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
             <li><article class="hentry">
                 <header>
                     <h1><a href="/meta-programmingclass.html" rel="bookmark"
@@ -304,24 +398,17 @@ Ruby是一门对元编程支持很强大的语言(只是比lisp弱一点)，而�
 ubuntu12.04 + emacs24 + leiningen2.3.4</p>
 <p>2.<strong>配置emacs</strong> <br />
   a.添加package地址，在<code>~/.emacs.d/init.el</code>中加入：   </p>
-<div class="highlight"><pre><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
-<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-             <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="o">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
-<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+<div class="highlight"><pre><span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">package</span><span class="p">)</span>
+<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">list</span> <span class="err">&#39;</span><span class="n">package</span><span class="o">-</span><span class="n">archives</span>
+             <span class="err">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="p">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="n">package</span><span class="o">-</span><span class="n">initialize</span><span class="p">)</span>
 </pre></div>
 
 
 <p>b.安装相关插件，在<code>~/.emacs.d/init.el</code>中加入：</p>
-<div class="highlight"><pre><span class="p">(</span><span class="nb">defvar</span> <span class="nv">my-packages</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">starter-kit</span>
-                      <span class="nv">starter-kit-lisp</span>
-                      <span class="nv">starter-kit-bindings</span>
-                      <span class="nv">starter-kit-eshell</span>
-                      <span class="nv">clojure-mode</span>
-                      <span class="nv">clojure-test-mode</span>
-                      <span class="nv">cider</span><span class="p">))</span>
-
-<span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">p</span> <span class="nv">my-packages</span><span class="p">)</span>
-  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">not ...</span></pre></div>
+<div class="highlight"><pre><span class="p">(</span><span class="n">defvar</span> <span class="n">my</span><span class="o">-</span><span class="n">packages</span> <span class="err">&#39;</span><span class="p">(</span><span class="n">starter</span><span class="o">-</span><span class="n">kit</span>
+                      <span class="n">starter</span><span class="o">-</span><span class="n">kit</span><span class="o">-</span><span class="n">lisp</span>
+                      <span class="n">starter</span><span class="o">-</span><span class="n">kit ...</span></pre></div>
                 <a class="readmore" href="/configure-emacs-for-clojure.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -367,91 +454,6 @@ ubuntu12.04 + emacs24 + leiningen2.3.4</p>
 的。还好Clojue也支持同一个函数体直接调用自身的TCO，只是要使用clojure的
 特殊形式，即使用recur关键字。改写如下 ...</p>
                 <a class="readmore" href="/recursive-clojure.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/description-in-python.html" rel="bookmark"
-                           title="Permalink to Description in Python">Description in Python</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-03-15T16:27:32+08:00">
-                Published: 六 15 三月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
-        </address>
-<p>In <a href="/category/python.html">Python</a>.</p>
-
-</footer><!-- /.post-info -->                <p>在python中一个描述器就是定义下面的方法中一个或多个的一个对象：</p>
-<div class="highlight"><pre><span class="n">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span><span class="n">t</span>
-<span class="n">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-<span class="n">__delete__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
-</pre></div>
-
-
-<p>如果一个对象同时定义了<code>__get__()</code>和<code>__set__()</code>，它叫做资料描述器。只定义了<code>__get__()</code>的描述器叫做非资料描述器(一般用于方法)。
-资料描述器和非资料描述器的区别在于：相对于实例字典的优先级。如果实例字典中有与资料描述器同名的属性，优先使用资料描述器中的；如果实例字典中有与非资料描述器中同名的属性，优先使用实例字典中的。即优先级 资料描述器 &gt; 实例字典 &gt; 非资料描述器。 <br />
-要想写一个只读的资料描述器，只需同时定义<code>__get__()</code>和<code>__set__()</code>并在<code>__set__()</code>中抛出一个<code>AttributeError</code>。</p>
-<p><strong>描述器的调用</strong> <br />
-描述器可以直接这么调用：<code>descriptor.__get__(obj)</code>，不过一般都是用来拦截对实例属性的访问。 <br />
-描述器的调用规则如下：   </p>
-<ul>
-<li><code>__get__(self ...</code></li></ul>
-                <a class="readmore" href="/description-in-python.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/context-manager-in-python.html" rel="bookmark"
-                           title="Permalink to Context manager in Python">Context manager in Python</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-03-14T17:13:46+08:00">
-                Published: 五 14 三月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
-        </address>
-<p>In <a href="/category/python.html">Python</a>.</p>
-
-</footer><!-- /.post-info -->                <p>上下文管理器(context manager)是Python2.5开始支持的一种语法，用于处理指
-定代码块进入和退出时的操作。一般使用with语法，也可以直接调用相应的方法。</p>
-<p><strong>with语句</strong> <br />
-with语句是用来简化“try/finally”语句的，通常用于处理共享资源的获取和
-释放，比如文件、数据库和线程资源。它的用法如下：</p>
-<div class="highlight"><pre><span class="k">with</span> <span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span><span class="p">:</span>
-    <span class="n">BLOCK</span>
-</pre></div>
-
-
-<p>其相当于进行了如下操作：</p>
-<div class="highlight"><pre><span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span>
-<span class="n">VAR</span><span class="o">.</span><span class="n">__enter__</span><span class="p">()</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">BLOCK</span>
-<span class="k">finally</span><span class="p">:</span>
-    <span class="n">VAR</span><span class="o">.</span><span class="n">__exit__</span><span class="p">()</span>
-</pre></div>
-
-
-<p>例子如下：</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
-<span class="k">class</span> <span class="nc">demo</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">label</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
-
-    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">start ...</span></pre></div>
-                <a class="readmore" href="/context-manager-in-python.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
