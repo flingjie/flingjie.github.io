@@ -42,29 +42,29 @@ var a = [1,2,3];
 var b = [4,5,6];
 Array.prototype.push.apply(a,b);
 // a contains [1,2,3,4,5,6]</p>
-<div class="highlight"><pre>  <span class="nx">And</span> <span class="nx">use</span> <span class="nx">concat</span><span class="p">()</span> <span class="nx">method</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">same</span> <span class="nx">but</span> <span class="nx">cancat</span><span class="p">()</span> <span class="nx">creates</span> <span class="k">new</span> <span class="nx">array</span> <span class="k">while</span> <span class="nb">Array</span> <span class="nx">Prototype</span> <span class="nx">push</span> <span class="nx">append</span> <span class="nx">to</span> <span class="nx">existing</span> <span class="nx">array</span> <span class="nx">itself</span><span class="p">.</span>
+<div class="highlight"><pre><span></span>  And use concat() method for the same but cancat() creates new array while Array Prototype push append to existing array itself.
 
-<span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span>
+* * * * *
 
-<span class="o">**</span> <span class="nx">Define</span> <span class="nx">a</span> <span class="kd">function</span> <span class="nx">which</span> <span class="nx">takes</span> <span class="nx">a</span> <span class="nx">string</span> <span class="nx">as</span> <span class="nx">an</span> <span class="nx">argument</span><span class="p">,</span> <span class="nx">and</span> <span class="k">return</span> <span class="nx">the</span> <span class="nx">same</span> <span class="nx">string</span> <span class="nx">separated</span> <span class="nx">by</span> <span class="nx">a</span> <span class="nx">space</span> <span class="o">**</span>
+** Define a function which takes a string as an argument, and return the same string separated by a space **
 
-<span class="err">```</span> <span class="nx">javascript</span> <span class="nx">separated</span> <span class="nx">by</span> <span class="nx">a</span> <span class="nx">space</span>
-<span class="kd">function</span> <span class="nx">spacify</span><span class="p">(</span><span class="nx">str</span><span class="p">){</span>
-    <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">);</span>
-<span class="p">}</span>
+``` javascript separated by a space
+function spacify(str){
+    return str.split(&#39;&#39;).join(&#39; &#39;);
+}
 </pre></div>
 
 
 <hr />
 <p><strong> Pass string argument to <em>console.log()</em> </strong></p>
-<div class="highlight"><pre><span class="kd">function</span> <span class="nx">log</span><span class="p">(){</span>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">log</span><span class="p">(){</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
 
 <p><strong> Prefix all logged messages with <em>"(app)"</em> </strong></p>
-<div class="highlight"><pre><span class="kd">function</span> <span class="nx">log</span><span class="p">(){</span>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">log</span><span class="p">(){</span>
     <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
     <span class="nx">args</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="s1">&#39;(app)&#39;</span><span class="p">);</span>
 

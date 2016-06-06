@@ -54,7 +54,7 @@
 </ul>
 <hr />
 <p><strong>重构例子</strong></p>
-<div class="highlight"><pre><span class="c1"># 原始代码</span>
+<div class="highlight"><pre><span></span><span class="c1"># 原始代码</span>
 <span class="k">class</span> <span class="nc">Computer</span>
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">computer_id</span><span class="p">,</span> <span class="n">data_source</span><span class="p">)</span>
     <span class="vi">@id</span> <span class="o">=</span> <span class="n">computer_id</span>
@@ -86,7 +86,7 @@
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c1"># 使用动态方法重构</span>
+<div class="highlight"><pre><span></span><span class="c1"># 使用动态方法重构</span>
 <span class="k">class</span> <span class="nc">Computer</span>
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">computer_id</span><span class="p">,</span> <span class="n">data_source</span><span class="p">)</span>
     <span class="vi">@id</span> <span class="o">=</span> <span class="n">computer_id</span>
@@ -114,7 +114,7 @@
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c1"># 使用幽灵方法重构</span>
+<div class="highlight"><pre><span></span><span class="c1"># 使用幽灵方法重构</span>
 <span class="k">class</span> <span class="nc">Computer</span>
   <span class="c1"># 创建白板， 以免方法命名冲突</span>
   <span class="nb">instance_methods</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">m</span><span class="o">|</span>

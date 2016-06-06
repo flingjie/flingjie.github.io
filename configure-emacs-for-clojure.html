@@ -45,7 +45,7 @@
 ubuntu12.04 + emacs24 + leiningen2.3.4</p>
 <p>2.<strong>配置emacs</strong> <br />
   a.添加package地址，在<code>~/.emacs.d/init.el</code>中加入：   </p>
-<div class="highlight"><pre><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
 <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
              <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="o">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
 <span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
@@ -53,7 +53,7 @@ ubuntu12.04 + emacs24 + leiningen2.3.4</p>
 
 
 <p>b.安装相关插件，在<code>~/.emacs.d/init.el</code>中加入：</p>
-<div class="highlight"><pre><span class="p">(</span><span class="nb">defvar</span> <span class="nv">my-packages</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">starter-kit</span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="k">defvar</span> <span class="nv">my-packages</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">starter-kit</span>
                       <span class="nv">starter-kit-lisp</span>
                       <span class="nv">starter-kit-bindings</span>
                       <span class="nv">starter-kit-eshell</span>
@@ -62,14 +62,14 @@ ubuntu12.04 + emacs24 + leiningen2.3.4</p>
                       <span class="nv">cider</span><span class="p">))</span>
 
 <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">p</span> <span class="nv">my-packages</span><span class="p">)</span>
-  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="nv">p</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="nv">p</span><span class="p">))</span>
     <span class="p">(</span><span class="nv">package-install</span> <span class="nv">p</span><span class="p">)))</span>
 </pre></div>
 
 
 <p>3.<strong>编辑相关操作</strong> <br />
 a.文件、窗口操作</p>
-<div class="highlight"><pre>C-x C-f    打开文件
+<div class="highlight"><pre><span></span>C-x C-f    打开文件
 C-x C-s    保存文件
 C-x b      切换buffer
 C-x k      关闭当前buffer
@@ -82,7 +82,7 @@ C-x 3      水平分割窗口
 
 
 <p>b.移动操作</p>
-<div class="highlight"><pre>C-a    移动到行头
+<div class="highlight"><pre><span></span>C-a    移动到行头
 C-e    移动到行尾
 C-n    移动到下一行
 C-p    移动到上一行
@@ -100,7 +100,7 @@ C-M-f  移动到前一个括号
 
 
 <p>c.编辑操作</p>
-<div class="highlight"><pre>C-d        删除一个字符
+<div class="highlight"><pre><span></span>C-d        删除一个字符
 M-d        删除一个单词
 C-k        删除一行
 C-w        删除选中区域
@@ -124,7 +124,7 @@ C-M-q      代码对齐
 
 
 <p>d.帮助操作</p>
-<div class="highlight"><pre>C-h b    查看当前的key绑定
+<div class="highlight"><pre><span></span>C-h b    查看当前的key绑定
 C-h m    查看当前的编辑模式
 C-h a    查找一个关键词的相关帮助
 C-h k    查看一个key的绑定
@@ -132,7 +132,7 @@ C-h k    查看一个key的绑定
 
 
 <p>4.<strong>编译相关操作</strong></p>
-<div class="highlight"><pre>C-c M-j    cider-jack-in,启动nREPL
+<div class="highlight"><pre><span></span>C-c M-j    cider-jack-in,启动nREPL
 C-c C-e    执行s表达式
 C-c C-r    执行当前选中区
 C-c C-z    运行lisp进程
@@ -140,7 +140,7 @@ C-c C-z    运行lisp进程
 
 
 <p>5.<strong>宏操作</strong></p>
-<div class="highlight"><pre>C-x (   ;;开始录制宏
+<div class="highlight"><pre><span></span>C-x (   ;;开始录制宏
 ...     ;;输入操作
 C-x )   ;;结束录制
 C-x e   ;;执行宏

@@ -44,12 +44,12 @@
 </footer><!-- /.post-info -->      <p>环境: 阿里云Centos+Apache+wordpress</p>
 <h3>1.Apache启用8080端口</h3>
 <p><strong>添加8080监听</strong></p>
-<div class="highlight"><pre># vim /usr/local/apache2/conf/httpd.confconf
+<div class="highlight"><pre><span></span># vim /usr/local/apache2/conf/httpd.confconf
 </pre></div>
 
 
 <p>在<code>Listen 80</code>后加入<code>Listen 8080</code></p>
-<div class="highlight"><pre>...
+<div class="highlight"><pre><span></span>...
 Listen 80
 
 # add here
@@ -58,12 +58,12 @@ Listen 8080
 
 
 <p><strong>配置服务器</strong></p>
-<div class="highlight"><pre># vim /usr/local/apache2/conf/extra/httpd-vhosts.conf 
+<div class="highlight"><pre><span></span># vim /usr/local/apache2/conf/extra/httpd-vhosts.conf 
 </pre></div>
 
 
 <p>添加网站:</p>
-<div class="highlight"><pre>...
+<div class="highlight"><pre><span></span>...
 <span class="nt">&lt;VirtualHost</span> <span class="err">*:8080</span><span class="nt">&gt;</span>
     # ServerAdmin webmaster@dummy-host2.example.com
     DocumentRoot &quot;/var/web2&quot;
@@ -75,12 +75,12 @@ Listen 8080
 
 
 <h3>2. 重启Apache</h3>
-<div class="highlight"><pre># service httpd restart
+<div class="highlight"><pre><span></span># service httpd restart
 </pre></div>
 
 
 <h3>3. 检查8080端口</h3>
-<div class="highlight"><pre># netstat -an | grep 8080
+<div class="highlight"><pre><span></span># netstat -an | grep 8080
 tcp        0      0 0.0.0.0:8080                0.0.0.0:*                   LISTEN
 </pre></div>
     </div><!-- /.entry-content -->

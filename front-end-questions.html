@@ -2,7 +2,7 @@
 <html lang="ch">
 <head>
         <meta charset="utf-8" />
-        <title>Jie's Blog - Apache</title>
+        <title>Front End Questions</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -22,63 +22,51 @@
                     <li><a href="/category/python.html">Python</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/front-end-questions.html" rel="bookmark"
+           title="Permalink to Front End Questions">Front End Questions</a></h1>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/apachekai-qi-8080duan-kou.html">Apache开启8080端口</a></h1>
+    <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-12-31T11:10:40+08:00">
-                Published: 四 31 十二月 2015
+        <abbr class="published" title="2016-06-06T21:16:16+08:00">
+                Published: 一 06 六月 2016
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
         </address>
-<p>In <a href="/category/apache.html">Apache</a>.</p>
+<p>In <a href="/category/note.html">Note</a>.</p>
 
-</footer><!-- /.post-info --><p>环境: 阿里云Centos+Apache+wordpress</p>
-<h3>1.Apache启用8080端口</h3>
-<p><strong>添加8080监听</strong></p>
-<div class="highlight"><pre><span></span># vim /usr/local/apache2/conf/httpd.confconf
-</pre></div>
+</footer><!-- /.post-info -->      <ul>
+<li>
+<p>行内元素有哪些？块级元素有哪些？空(void)元素有哪些？</p>
+<ol>
+<li>行内元素有：a b span img input select strong</li>
+<li>块级元素有：div ul ol li dl dt dd h1 h2 h3...p</li>
+<li>常见空元素；br hr img input link meta</li>
+</ol>
+</li>
+<li>
+<p>浏览器内多个标签页之间通信方式
+    WebSocket, ShareWorker, 也可以调用localstorage，cookies等本地存储方式；</p>
+</li>
+<li>
+<p>this对象</p>
+<ul>
+<li>this总是指向函数的直接调用者</li>
+<li>如果有new关键字，this指向new生成的那个对象</li>
+<li>在事件中，this指向触发这个事件的对象</li>
+</ul>
+</li>
+</ul>
+    </div><!-- /.entry-content -->
 
-
-<p>在<code>Listen 80</code>后加入<code>Listen 8080</code></p>
-<div class="highlight"><pre><span></span>...
-Listen 80
-
-# add here
-Listen 8080
-</pre></div>
-
-
-<p><strong>配置服务器</strong></p>
-<div class="highlight"><pre><span></span># vim /usr/local/apache2/conf/extra/httpd-vhosts.conf 
-</pre></div>
-
-
-<p>添加网站:</p>
-<div class="highlight"><pre><span></span>...
-<span class="nt">&lt;VirtualHost</span> <span class="err">*:8080</span><span class="nt">&gt;</span>
-    # ServerAdmin webmaster@dummy-host2.example.com
-    DocumentRoot &quot;/var/web2&quot;
-    ServerName example.com
-    ErrorLog &quot;logs/example.com-error_log&quot;
-    CustomLog &quot;logs/example.com-access_log&quot; common
-<span class="nt">&lt;/VirtualHost&gt;</span>
-</pre></div>
-
-
-<h3>2. 重启Apache</h3>
-<div class="highlight"><pre><span></span># service httpd restart
-</pre></div>
-
-
-<h3>3. 检查8080端口</h3>
-<div class="highlight"><pre><span></span># netstat -an | grep 8080
-tcp        0      0 0.0.0.0:8080                0.0.0.0:*                   LISTEN
-</pre></div>                </article>
-            </aside><!-- /#featured -->
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

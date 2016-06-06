@@ -27,6 +27,33 @@
                     <ol id="posts-list" class="hfeed" start="9">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="/configure-https.html" rel="bookmark"
+                           title="Permalink to Configure Https">Configure Https</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-10-10T16:35:59+08:00">
+                Published: 六 10 十月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/https.html">Https</a>.</p>
+
+</footer><!-- /.post-info -->                <p>Https just means "http with ssl". In order to enable SSL, we need a
+certificate which is either self-signed or signed by an external
+Cerificate Authority. A self-signed certificate need to be imported
+when browsing. For easy-to-use purposes, use an external cerificate
+here. <a href="http://www.startssl.com/">http://www.startssl.com/</a> and
+<a href="https://buy.wosign.com/">https://buy ...</a></p>
+                <a class="readmore" href="/configure-https.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="/vim-tips.html" rel="bookmark"
                            title="Permalink to Vim Tips">Vim Tips</a></h1>
                 </header>
@@ -71,14 +98,14 @@
 1、 <strong>安装pathogen</strong> <br />
 pathogens是vim的插件管理工具，可简化对vim插件的管理。 <br />
 安装如下：</p>
-<div class="highlight"><pre>mkdir -p ~/.vim/autoload ~/.vim/bundle; \
+<div class="highlight"><pre><span></span>mkdir -p ~/.vim/autoload ~/.vim/bundle; \
 curl -LSso ~/.vim/autoload/pathogen.vim \
     https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim;
 </pre></div>
 
 
 <p>然后在<code>.vimrc</code>中加入：</p>
-<div class="highlight"><pre>execute pathogen#infect()
+<div class="highlight"><pre><span></span>execute pathogen#infect()
 &quot; 加在下列配置之前
 syntax on
 filetype plugin indent on
@@ -88,7 +115,7 @@ filetype plugin indent on
 <p>2、 <strong>rails.vim</strong> <br />
 rails插件，无需多介绍。 <br />
 常用快捷键:</p>
-<div class="highlight"><pre>gf ...</pre></div>
+<div class="highlight"><pre><span></span>gf ...</pre></div>
                 <a class="readmore" href="/vim-for-rails.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -123,7 +150,7 @@ rails插件，无需多介绍。 <br />
 <p>注2: 使一个模块可以通过钩子方法扩展它的包含者。</p>
 </li>
 </ul>
-<div class="highlight"><pre><span class="k">module</span> <span class="nn">M</span>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nn">M</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
     <span class="n">base</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="no">ClassMethods</span><span class="p">)</span>
   <span class="k">end</span>
@@ -170,7 +197,7 @@ rails插件，无需多介绍。 <br />
 <img alt="Object Definitions" src="/images/ObjectDefinitions.png" />
 <br>
  * 注1:在类(或模块)定义时，类本身充当了当前对象self的角色。</p>
-<div class="highlight"><pre><span class="n">result</span> <span class="o">=</span> <span class="k">class</span> <span class="nc">MyClass</span>
+<div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="k">class</span> <span class="nc">MyClass</span>
   <span class="nb">self</span>
 <span class="k">end</span>
 
@@ -199,7 +226,7 @@ rails插件，无需多介绍。 <br />
 <p>注6: eigenclass是一个对象特有的隐藏类，它是单件方法存在的地方。Ruby中可以使用如下语法进入eigenclass的作用域。</p>
 </li>
 </ul>
-<div class="highlight"><pre><span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="n">an_object</span> 
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="n">an_object</span> 
   <span class="c1"># do ...</span></pre></div>
                 <a class="readmore" href="/meta-programmingclass.html">read more</a>
                 </div><!-- /.entry-content -->
@@ -238,7 +265,7 @@ rails插件，无需多介绍。 <br />
   个深入到对象中的代码片段，对其操作。</p>
 </li>
 </ul>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">C</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">C</span>
   <span class="k">def</span> <span class="nf">initialize</span>
     <span class="vi">@x</span><span class="o">=</span><span class="s2">&quot;a private instance variable&quot;</span>
   <span class="k">end</span>
@@ -285,7 +312,7 @@ rails插件，无需多介绍。 <br />
 </ul>
 <hr />
 <p><strong>重构例子</strong></p>
-<div class="highlight"><pre><span class="c1"># 原始代码</span>
+<div class="highlight"><pre><span></span><span class="c1"># 原始代码</span>
 <span class="k">class</span> <span class="nc">Computer</span>
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">computer_id</span><span class="p">,</span> <span class="n">data_source</span><span class="p">)</span>
     <span class="vi">@id</span> <span class="o">=</span> <span class="n">computer_id</span>
@@ -338,7 +365,7 @@ rails插件，无需多介绍。 <br />
 值得注意的是，实例变量存放在对象中，而方法存放在类中，比如</p>
 </li>
 </ul>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">MyClass</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span>
   <span class="k">def</span> <span class="nf">my_method ...</span></pre></div>
                 <a class="readmore" href="/metaprogrammingobjectmodel.html">read more</a>
                 </div><!-- /.entry-content -->
@@ -402,53 +429,10 @@ Ruby是一门对元编程支持很强大的语言(只是比lisp弱一点)，而�
                 <a class="readmore" href="/a-algorithm.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/configure-emacs-for-clojure.html" rel="bookmark"
-                           title="Permalink to Configure Emacs for clojure">Configure Emacs for clojure</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-03-29T10:39:00+08:00">
-                Published: 六 29 三月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
-        </address>
-<p>In <a href="/category/emacs.html">emacs</a>.</p>
-
-</footer><!-- /.post-info -->                <p>1.<strong>使用环境</strong>：
-ubuntu12.04 + emacs24 + leiningen2.3.4</p>
-<p>2.<strong>配置emacs</strong> <br />
-  a.添加package地址，在<code>~/.emacs.d/init.el</code>中加入：   </p>
-<div class="highlight"><pre><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
-<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
-             <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="o">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
-<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
-</pre></div>
-
-
-<p>b.安装相关插件，在<code>~/.emacs.d/init.el</code>中加入：</p>
-<div class="highlight"><pre><span class="p">(</span><span class="nb">defvar</span> <span class="nv">my-packages</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">starter-kit</span>
-                      <span class="nv">starter-kit-lisp</span>
-                      <span class="nv">starter-kit-bindings</span>
-                      <span class="nv">starter-kit-eshell</span>
-                      <span class="nv">clojure-mode</span>
-                      <span class="nv">clojure-test-mode</span>
-                      <span class="nv">cider</span><span class="p">))</span>
-
-<span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">p</span> <span class="nv">my-packages</span><span class="p">)</span>
-  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">not ...</span></pre></div>
-                <a class="readmore" href="/configure-emacs-for-clojure.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
         <a href="/index.html">&laquo;</a>
-    Page 2 / 3
+    Page 2 / 4
         <a href="/index3.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->

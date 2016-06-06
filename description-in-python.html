@@ -42,7 +42,7 @@
 <p>In <a href="/category/python.html">Python</a>.</p>
 
 </footer><!-- /.post-info -->      <p>在python中一个描述器就是定义下面的方法中一个或多个的一个对象：</p>
-<div class="highlight"><pre><span class="n">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span><span class="n">t</span>
+<div class="highlight"><pre><span></span><span class="n">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span><span class="n">t</span>
 <span class="n">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 <span class="n">__delete__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
 </pre></div>
@@ -57,7 +57,7 @@
 <ul>
 <li><code>__get__(self, instance, owner)</code></li>
 </ul>
-<div class="highlight"><pre>  <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span>         <span class="n">will</span> <span class="n">call</span> <span class="n">descriptor</span><span class="o">.</span><span class="n">__get__</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span> <span class="n">OwnerClass</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>  <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span>         <span class="n">will</span> <span class="n">call</span> <span class="n">descriptor</span><span class="o">.</span><span class="n">__get__</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span> <span class="n">OwnerClass</span><span class="p">)</span>
   <span class="n">OwnerClass</span><span class="o">.</span><span class="n">descriptor</span>  <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__get__</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">OwnerClass</span><span class="p">)</span>
 </pre></div>
 
@@ -65,14 +65,14 @@
 <ul>
 <li><code>__set__(self, instance, value)</code></li>
 </ul>
-<div class="highlight"><pre>  <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span> <span class="o">=</span> <span class="mi">5</span>     <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__set__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>  <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span> <span class="o">=</span> <span class="mi">5</span>     <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__set__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
 
 <ul>
 <li><code>__delete__(self, instance)</code></li>
 </ul>
-<div class="highlight"><pre>  <span class="k">del</span> <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span>     <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__delete__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>  <span class="k">del</span> <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span>     <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__delete__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 </pre></div>
 
 

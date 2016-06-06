@@ -37,7 +37,7 @@
 <p>In <a href="/category/python.html">Python</a>.</p>
 
 </footer><!-- /.post-info --><p>在python中一个描述器就是定义下面的方法中一个或多个的一个对象：</p>
-<div class="highlight"><pre><span class="n">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span><span class="n">t</span>
+<div class="highlight"><pre><span></span><span class="n">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span><span class="n">t</span>
 <span class="n">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 <span class="n">__delete__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
 </pre></div>
@@ -52,7 +52,7 @@
 <ul>
 <li><code>__get__(self, instance, owner)</code></li>
 </ul>
-<div class="highlight"><pre>  <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span>         <span class="n">will</span> <span class="n">call</span> <span class="n">descriptor</span><span class="o">.</span><span class="n">__get__</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span> <span class="n">OwnerClass</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>  <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span>         <span class="n">will</span> <span class="n">call</span> <span class="n">descriptor</span><span class="o">.</span><span class="n">__get__</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span> <span class="n">OwnerClass</span><span class="p">)</span>
   <span class="n">OwnerClass</span><span class="o">.</span><span class="n">descriptor</span>  <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__get__</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">OwnerClass</span><span class="p">)</span>
 </pre></div>
 
@@ -60,14 +60,14 @@
 <ul>
 <li><code>__set__(self, instance, value)</code></li>
 </ul>
-<div class="highlight"><pre>  <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span> <span class="o">=</span> <span class="mi">5</span>     <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__set__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>  <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span> <span class="o">=</span> <span class="mi">5</span>     <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__set__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
 
 <ul>
 <li><code>__delete__(self, instance)</code></li>
 </ul>
-<div class="highlight"><pre>  <span class="k">del</span> <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span>     <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__delete__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>  <span class="k">del</span> <span class="n">obj</span><span class="o">.</span><span class="n">descriptor</span>     <span class="n">will</span> <span class="n">call</span>  <span class="n">descriptor</span><span class="o">.</span><span class="n">__delete__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 </pre></div>
 
 
@@ -105,13 +105,13 @@
 <p><strong>with语句</strong> <br />
 with语句是用来简化“try/finally”语句的，通常用于处理共享资源的获取和
 释放，比如文件、数据库和线程资源。它的用法如下：</p>
-<div class="highlight"><pre><span class="k">with</span> <span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span><span class="p">:</span>
     <span class="n">BLOCK</span>
 </pre></div>
 
 
 <p>其相当于进行了如下操作：</p>
-<div class="highlight"><pre><span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span>
+<div class="highlight"><pre><span></span><span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span>
 <span class="n">VAR</span><span class="o">.</span><span class="n">__enter__</span><span class="p">()</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">BLOCK</span>
@@ -121,7 +121,7 @@ with语句是用来简化“try/finally”语句的，通常用于处理共享�
 
 
 <p>例子如下：</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="k">class</span> <span class="nc">demo</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">label</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
@@ -151,15 +151,15 @@ with语句是用来简化“try/finally”语句的，通常用于处理共享�
 
 </footer><!-- /.post-info -->                <p>装饰器的作用是在原有对象的基础上添加额外功能。python中可以将函数作为参
 数，进行装饰，返回经过修饰过的函数，比如：</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">print</span> <span class="s">&quot;*** wrapper ***&quot;</span>
+        <span class="k">print</span> <span class="s2">&quot;*** wrapper ***&quot;</span>
         <span class="n">fn</span><span class="p">()</span>
-        <span class="k">print</span> <span class="s">&quot;*** wrapper ***&quot;</span>
+        <span class="k">print</span> <span class="s2">&quot;*** wrapper ***&quot;</span>
     <span class="k">return</span> <span class="n">wrapper</span>
 
 <span class="k">def</span> <span class="nf">origin_fn</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&quot;--- origin ---&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;--- origin ---&quot;</span>
 
 <span class="n">decorated_fn</span> <span class="o">=</span> <span class="n">decorator</span><span class="p">(</span><span class="n">origin_fn</span><span class="p">)</span>
 
@@ -168,14 +168,14 @@ with语句是用来简化“try/finally”语句的，通常用于处理共享�
 
 
 <p>python可以使用语法糖@来达到相同的作用，例子如下：</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">makebold</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">makebold</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s">&quot;&lt;b&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;&lt;/b&gt;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;b&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;&lt;/b&gt;&quot;</span>
     <span class="k">return</span> <span class="n">wrapper</span>
 
 <span class="k">def</span> <span class="nf">makeitalic</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s">&quot;&lt;i&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;&lt;/i&gt;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;i&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;&lt;/i&gt;&quot;</span>
     <span class="k">return ...</span></pre></div>
                 <a class="readmore" href="/decroator-in-python.html">read more</a>
                 </div><!-- /.entry-content -->

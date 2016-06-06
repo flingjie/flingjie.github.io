@@ -27,6 +27,49 @@
                     <ol id="posts-list" class="hfeed" start="9">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="/configure-emacs-for-clojure.html" rel="bookmark"
+                           title="Permalink to Configure Emacs for clojure">Configure Emacs for clojure</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-29T10:39:00+08:00">
+                Published: 六 29 三月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/emacs.html">emacs</a>.</p>
+
+</footer><!-- /.post-info -->                <p>1.<strong>使用环境</strong>：
+ubuntu12.04 + emacs24 + leiningen2.3.4</p>
+<p>2.<strong>配置emacs</strong> <br />
+  a.添加package地址，在<code>~/.emacs.d/init.el</code>中加入：   </p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
+             <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;marmalade&quot;</span> <span class="o">.</span> <span class="s">&quot;http://marmalade-repo.org/packages/&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+</pre></div>
+
+
+<p>b.安装相关插件，在<code>~/.emacs.d/init.el</code>中加入：</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="k">defvar</span> <span class="nv">my-packages</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">starter-kit</span>
+                      <span class="nv">starter-kit-lisp</span>
+                      <span class="nv">starter-kit-bindings</span>
+                      <span class="nv">starter-kit-eshell</span>
+                      <span class="nv">clojure-mode</span>
+                      <span class="nv">clojure-test-mode</span>
+                      <span class="nv">cider</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">p</span> <span class="nv">my-packages</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">not ...</span></pre></div>
+                <a class="readmore" href="/configure-emacs-for-clojure.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="/recursive-clojure.html" rel="bookmark"
                            title="Permalink to Recursive Clojure">Recursive Clojure</a></h1>
                 </header>
@@ -44,7 +87,7 @@
 
 </footer><!-- /.post-info -->                <p>一般函数可以通过调用自身来实现递归的效果，但这种方式会消耗栈有导致栈
 溢出。比如下面这个计算阶乘的例子：</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">recur-fac</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">recur-fac</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
     <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="mi">1</span> <span class="nv">n</span><span class="p">)</span>
         <span class="mi">1</span>
         <span class="p">(</span><span class="nb">* </span><span class="nv">n</span> <span class="p">(</span><span class="nf">recur-fac</span> <span class="p">(</span><span class="nb">dec </span><span class="nv">n</span><span class="p">)))))</span>
@@ -52,7 +95,7 @@
 
 
 <p>通常，可以改写成尾递归的方式来避免消耗栈导致栈溢出，改写如下：</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">recur-fac</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">recur-fac</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
     <span class="p">(</span><span class="nf">letfn</span> <span class="p">[(</span><span class="nf">fac</span> <span class="p">[</span><span class="nv">c</span> <span class="nv">r</span><span class="p">]</span>
                 <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="mi">0</span> <span class="nv">c</span><span class="p">)</span>
                     <span class="nv">r</span>
@@ -87,7 +130,7 @@
 <p>In <a href="/category/python.html">Python</a>.</p>
 
 </footer><!-- /.post-info -->                <p>在python中一个描述器就是定义下面的方法中一个或多个的一个对象：</p>
-<div class="highlight"><pre><span class="n">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span><span class="n">t</span>
+<div class="highlight"><pre><span></span><span class="n">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span><span class="n">t</span>
 <span class="n">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 <span class="n">__delete__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
 </pre></div>
@@ -127,13 +170,13 @@
 <p><strong>with语句</strong> <br />
 with语句是用来简化“try/finally”语句的，通常用于处理共享资源的获取和
 释放，比如文件、数据库和线程资源。它的用法如下：</p>
-<div class="highlight"><pre><span class="k">with</span> <span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span><span class="p">:</span>
     <span class="n">BLOCK</span>
 </pre></div>
 
 
 <p>其相当于进行了如下操作：</p>
-<div class="highlight"><pre><span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span>
+<div class="highlight"><pre><span></span><span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span>
 <span class="n">VAR</span><span class="o">.</span><span class="n">__enter__</span><span class="p">()</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">BLOCK</span>
@@ -143,7 +186,7 @@ with语句是用来简化“try/finally”语句的，通常用于处理共享�
 
 
 <p>例子如下：</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="k">class</span> <span class="nc">demo</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">label</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
@@ -173,15 +216,15 @@ with语句是用来简化“try/finally”语句的，通常用于处理共享�
 
 </footer><!-- /.post-info -->                <p>装饰器的作用是在原有对象的基础上添加额外功能。python中可以将函数作为参
 数，进行装饰，返回经过修饰过的函数，比如：</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">print</span> <span class="s">&quot;*** wrapper ***&quot;</span>
+        <span class="k">print</span> <span class="s2">&quot;*** wrapper ***&quot;</span>
         <span class="n">fn</span><span class="p">()</span>
-        <span class="k">print</span> <span class="s">&quot;*** wrapper ***&quot;</span>
+        <span class="k">print</span> <span class="s2">&quot;*** wrapper ***&quot;</span>
     <span class="k">return</span> <span class="n">wrapper</span>
 
 <span class="k">def</span> <span class="nf">origin_fn</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&quot;--- origin ---&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;--- origin ---&quot;</span>
 
 <span class="n">decorated_fn</span> <span class="o">=</span> <span class="n">decorator</span><span class="p">(</span><span class="n">origin_fn</span><span class="p">)</span>
 
@@ -190,14 +233,14 @@ with语句是用来简化“try/finally”语句的，通常用于处理共享�
 
 
 <p>python可以使用语法糖@来达到相同的作用，例子如下：</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">makebold</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">makebold</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s">&quot;&lt;b&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;&lt;/b&gt;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;b&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;&lt;/b&gt;&quot;</span>
     <span class="k">return</span> <span class="n">wrapper</span>
 
 <span class="k">def</span> <span class="nf">makeitalic</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s">&quot;&lt;i&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;&lt;/i&gt;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;i&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;&lt;/i&gt;&quot;</span>
     <span class="k">return ...</span></pre></div>
                 <a class="readmore" href="/decroator-in-python.html">read more</a>
                 </div><!-- /.entry-content -->
@@ -294,7 +337,7 @@ var a = [1,2,3];
 var b = [4,5,6];
 Array.prototype.push.apply(a,b);
 // a contains [1,2,3,4,5,6]</p>
-<div class="highlight"><pre>  <span class="nx">And</span> <span class="nx">use</span> <span class="nx">concat</span><span class="p">()</span> <span class="nx">method</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">same</span> <span class="nx">but</span> <span class="nx">cancat</span><span class="p">()</span> <span class="nx">creates</span> <span class="k">new</span> <span class="nx">array</span> <span class="k">while ...</span></pre></div>
+<div class="highlight"><pre><span></span>  And use concat() method for the same but cancat() creates new array while ...</pre></div>
                 <a class="readmore" href="/javascript-tips.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
@@ -352,48 +395,11 @@ Array.prototype.push.apply(a,b);
                 <a class="readmore" href="/mastery.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/the-art-of-learning.html" rel="bookmark"
-                           title="Permalink to The Art of Learning">The Art of Learning</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-12-06T23:20:30+08:00">
-                Published: 四 06 十二月 2012
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
-        </address>
-<p>In <a href="/category/note.html">Note</a>.</p>
-
-</footer><!-- /.post-info -->                <p>追求卓越的关键在于，要坚持充满活力、长期的学习过程，不再满足于原地踏步、
-平平庸庸。</p>
-<ol>
-<li><em>划小圈</em>：自己的最佳状态。 　　 </li>
-<li><em>漩涡效应：</em> 在体育比赛当中我们经常会发现一个现象，原本势均力敌双方
-   中的一方在犯了一个错误之后往往连续失分，最后彻底溃败。大部分时候 双
-   方对峙的差距其实只是一线之隔，当情况变化之后我们可能丧失了优势，而
-   我们的内心往往并不能很好地接受这个变化。这个时候心理的微妙变化往往
-   会使得我们 的表现大失水准。我们往往不能理性地面对沉默资本，我们应该
-   尽可能地去冷静，去深呼吸，去接受这个变化。 　　</li>
-<li><em>整理理论、渐进理论：</em> 其实这是我们讨论的最欢乐的一部分。究竟是不是
-   有天才？所谓的天才究竟是天生为主还是后天为主？究竟该坚持结果主义 还
-   是过程主义？我个人觉得整体理论只是作为一个反例出现在书中，那种自以
-   为是的状态，自以为自己高过别人的心理是没办法持续突破自己的。只有坦
-   然地接纳自 己的强项和弱项，在每次比赛之后总结得失，才是真正可以内化
-   的修炼。更重要的是，这是我们个人与企业突破天花板的唯一方式。当你敢
-   于犯错，乐于失败的时 ...</li></ol>
-                <a class="readmore" href="/the-art-of-learning.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
         <a href="/author/flingjie2.html">&laquo;</a>
-    Page 3 / 3
+    Page 3 / 4
+        <a href="/author/flingjie4.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->
         <section id="extras" class="body">

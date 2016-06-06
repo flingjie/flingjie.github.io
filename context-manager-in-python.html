@@ -46,13 +46,13 @@
 <p><strong>with语句</strong> <br />
 with语句是用来简化“try/finally”语句的，通常用于处理共享资源的获取和
 释放，比如文件、数据库和线程资源。它的用法如下：</p>
-<div class="highlight"><pre><span class="k">with</span> <span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span><span class="p">:</span>
     <span class="n">BLOCK</span>
 </pre></div>
 
 
 <p>其相当于进行了如下操作：</p>
-<div class="highlight"><pre><span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span>
+<div class="highlight"><pre><span></span><span class="n">VAR</span> <span class="o">=</span> <span class="n">EXPR</span>
 <span class="n">VAR</span><span class="o">.</span><span class="n">__enter__</span><span class="p">()</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">BLOCK</span>
@@ -62,7 +62,7 @@ with语句是用来简化“try/finally”语句的，通常用于处理共享�
 
 
 <p>例子如下：</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="k">class</span> <span class="nc">demo</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">label</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
@@ -72,19 +72,19 @@ with语句是用来简化“try/finally”语句的，通常用于处理共享�
 
     <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_ty</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
         <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-        <span class="k">print</span> <span class="p">(</span><span class="s">&#39;{}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">))</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s1">&#39;{}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">))</span>
 
-<span class="k">with</span> <span class="n">demo</span><span class="p">(</span><span class="s">&#39;counting&#39;</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">demo</span><span class="p">(</span><span class="s1">&#39;counting&#39;</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="mi">10000000</span>
     <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
 
-<span class="c">#  counting: 0.933553934097</span>
+<span class="c1">#  counting: 0.933553934097</span>
 </pre></div>
 
 
 <p>也可利用@contextmanager装饰器改写如下:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
 <span class="nd">@contextmanager</span>
@@ -94,16 +94,16 @@ with语句是用来简化“try/finally”语句的，通常用于处理共享�
         <span class="k">yield</span>
     <span class="k">finally</span><span class="p">:</span>
         <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&#39;{}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{}: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
 
-<span class="k">with</span> <span class="n">demo</span><span class="p">(</span><span class="s">&#39;counting&#39;</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">demo</span><span class="p">(</span><span class="s1">&#39;counting&#39;</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="mi">10000000</span>
     <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
-<span class="c"># counting: 0.947228908539</span>
+<span class="c1"># counting: 0.947228908539</span>
 
-<span class="c"># 其中yield之前的所有代码都类似于__enter__方法的内容。而yield之后的所有</span>
-<span class="c"># 代码类似__exit__方法的内容。</span>
+<span class="c1"># 其中yield之前的所有代码都类似于__enter__方法的内容。而yield之后的所有</span>
+<span class="c1"># 代码类似__exit__方法的内容。</span>
 </pre></div>
     </div><!-- /.entry-content -->
 

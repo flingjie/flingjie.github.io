@@ -46,7 +46,7 @@
 <p><strong>A*算法与BFS</strong>：可以这样说，BFS是A<em>算法的一个特例。对于一个BFS算法，从当前节点扩展出来的每一个节点（如果没有被访问过的话）都要放进队列进行进一步扩展。也就是说BFS的估计函数h永远等于0，没有一点启发式的信息，可以认为BFS是“最烂的”A</em>算法。</p>
 <p><strong>IDA*算法</strong>：这种算法被称为迭代加深A<em>算法，可以有效的解决A</em>空间增长带来的问题，甚至可以不用到优先级队列。</p>
 <p>二、A*伪代码</p>
-<div class="highlight"><pre>    <span class="nx">push</span> <span class="nx">startNode</span> <span class="nx">onto</span> <span class="nx">openList</span>
+<div class="highlight"><pre><span></span>    <span class="nx">push</span> <span class="nx">startNode</span> <span class="nx">onto</span> <span class="nx">openList</span>
     <span class="k">while</span><span class="p">(</span><span class="nx">openList</span> <span class="nx">is</span> <span class="nx">not</span> <span class="nx">empty</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="nx">current</span> <span class="nx">is</span> <span class="nx">goal</span> <span class="k">return</span> <span class="nx">path</span>
 
@@ -71,7 +71,7 @@
 
 
 <p>三、coffeescript实现</p>
-<div class="highlight"><pre><span class="nv">astar =</span>
+<div class="highlight"><pre><span></span><span class="nv">astar =</span>
     <span class="nv">init: </span><span class="nf">(grid) -&gt;</span>
         <span class="k">for</span> <span class="nx">x</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">...</span><span class="nx">grid</span><span class="p">.</span><span class="nx">length</span><span class="p">]</span>
             <span class="k">for</span> <span class="nx">y</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">...</span><span class="nx">grid</span><span class="p">[</span><span class="nx">x</span><span class="p">].</span><span class="nx">length</span><span class="p">]</span>

@@ -43,15 +43,15 @@
 
 </footer><!-- /.post-info -->      <p>装饰器的作用是在原有对象的基础上添加额外功能。python中可以将函数作为参
 数，进行装饰，返回经过修饰过的函数，比如：</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">print</span> <span class="s">&quot;*** wrapper ***&quot;</span>
+        <span class="k">print</span> <span class="s2">&quot;*** wrapper ***&quot;</span>
         <span class="n">fn</span><span class="p">()</span>
-        <span class="k">print</span> <span class="s">&quot;*** wrapper ***&quot;</span>
+        <span class="k">print</span> <span class="s2">&quot;*** wrapper ***&quot;</span>
     <span class="k">return</span> <span class="n">wrapper</span>
 
 <span class="k">def</span> <span class="nf">origin_fn</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&quot;--- origin ---&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;--- origin ---&quot;</span>
 
 <span class="n">decorated_fn</span> <span class="o">=</span> <span class="n">decorator</span><span class="p">(</span><span class="n">origin_fn</span><span class="p">)</span>
 
@@ -60,23 +60,23 @@
 
 
 <p>python可以使用语法糖@来达到相同的作用，例子如下：</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">makebold</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">makebold</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s">&quot;&lt;b&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;&lt;/b&gt;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;b&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;&lt;/b&gt;&quot;</span>
     <span class="k">return</span> <span class="n">wrapper</span>
 
 <span class="k">def</span> <span class="nf">makeitalic</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s">&quot;&lt;i&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;&lt;/i&gt;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;i&gt;&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;&lt;/i&gt;&quot;</span>
     <span class="k">return</span> <span class="n">wrapper</span>
 
 <span class="nd">@makebold</span>
 <span class="nd">@makeitalic</span>
 <span class="k">def</span> <span class="nf">helloworld</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s">&quot;hello world&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;hello world&quot;</span>
 
 <span class="k">print</span> <span class="n">helloworld</span><span class="p">()</span>
-<span class="c">## return &lt;b&gt;&lt;i&gt;helloworld&lt;/i&gt;&lt;/b&gt;</span>
+<span class="c1">## return &lt;b&gt;&lt;i&gt;helloworld&lt;/i&gt;&lt;/b&gt;</span>
 </pre></div>
     </div><!-- /.entry-content -->
 

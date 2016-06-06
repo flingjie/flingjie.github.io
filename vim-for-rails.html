@@ -45,14 +45,14 @@
 1、 <strong>安装pathogen</strong> <br />
 pathogens是vim的插件管理工具，可简化对vim插件的管理。 <br />
 安装如下：</p>
-<div class="highlight"><pre>mkdir -p ~/.vim/autoload ~/.vim/bundle; \
+<div class="highlight"><pre><span></span>mkdir -p ~/.vim/autoload ~/.vim/bundle; \
 curl -LSso ~/.vim/autoload/pathogen.vim \
     https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim;
 </pre></div>
 
 
 <p>然后在<code>.vimrc</code>中加入：</p>
-<div class="highlight"><pre>execute pathogen#infect()
+<div class="highlight"><pre><span></span>execute pathogen#infect()
 &quot; 加在下列配置之前
 syntax on
 filetype plugin indent on
@@ -62,13 +62,13 @@ filetype plugin indent on
 <p>2、 <strong>rails.vim</strong> <br />
 rails插件，无需多介绍。 <br />
 常用快捷键:</p>
-<div class="highlight"><pre>gf           =&gt;  跳转到定义
+<div class="highlight"><pre><span></span>gf           =&gt;  跳转到定义
 ctrl+6       =&gt;  返回上一文件
 </pre></div>
 
 
 <p>常用命令：</p>
-<div class="highlight"><pre><span class="c1"># 查找文件</span>
+<div class="highlight"><pre><span></span><span class="c1"># 查找文件</span>
 <span class="ss">:Rfind</span> <span class="n">routes</span><span class="o">.</span><span class="n">rb</span>
 
 <span class="c1"># 打开model</span>

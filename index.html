@@ -25,7 +25,52 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/apachekai-qi-8080duan-kou.html">Apache开启8080端口</a></h1>
+                    <h1 class="entry-title"><a href="/front-end-questions.html">Front End Questions</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-06-06T21:16:16+08:00">
+                Published: 一 06 六月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
+        </address>
+<p>In <a href="/category/note.html">Note</a>.</p>
+
+</footer><!-- /.post-info --><ul>
+<li>
+<p>行内元素有哪些？块级元素有哪些？空(void)元素有哪些？</p>
+<ol>
+<li>行内元素有：a b span img input select strong</li>
+<li>块级元素有：div ul ol li dl dt dd h1 h2 h3...p</li>
+<li>常见空元素；br hr img input link meta</li>
+</ol>
+</li>
+<li>
+<p>浏览器内多个标签页之间通信方式
+    WebSocket, ShareWorker, 也可以调用localstorage，cookies等本地存储方式；</p>
+</li>
+<li>
+<p>this对象</p>
+<ul>
+<li>this总是指向函数的直接调用者</li>
+<li>如果有new关键字，this指向new生成的那个对象</li>
+<li>在事件中，this指向触发这个事件的对象</li>
+</ul>
+</li>
+</ul>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/apachekai-qi-8080duan-kou.html" rel="bookmark"
+                           title="Permalink to Apache开启8080端口">Apache开启8080端口</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-12-31T11:10:40+08:00">
                 Published: 四 31 十二月 2015
@@ -36,15 +81,15 @@
         </address>
 <p>In <a href="/category/apache.html">Apache</a>.</p>
 
-</footer><!-- /.post-info --><p>环境: 阿里云Centos+Apache+wordpress</p>
+</footer><!-- /.post-info -->                <p>环境: 阿里云Centos+Apache+wordpress</p>
 <h3>1.Apache启用8080端口</h3>
 <p><strong>添加8080监听</strong></p>
-<div class="highlight"><pre># vim /usr/local/apache2/conf/httpd.confconf
+<div class="highlight"><pre><span></span># vim /usr/local/apache2/conf/httpd.confconf
 </pre></div>
 
 
 <p>在<code>Listen 80</code>后加入<code>Listen 8080</code></p>
-<div class="highlight"><pre>...
+<div class="highlight"><pre><span></span>...
 Listen 80
 
 # add here
@@ -53,36 +98,20 @@ Listen 8080
 
 
 <p><strong>配置服务器</strong></p>
-<div class="highlight"><pre># vim /usr/local/apache2/conf/extra/httpd-vhosts.conf 
+<div class="highlight"><pre><span></span># vim /usr/local/apache2/conf/extra/httpd-vhosts.conf 
 </pre></div>
 
 
 <p>添加网站:</p>
-<div class="highlight"><pre>...
+<div class="highlight"><pre><span></span>...
 <span class="nt">&lt;VirtualHost</span> <span class="err">*:8080</span><span class="nt">&gt;</span>
     # ServerAdmin webmaster@dummy-host2.example.com
     DocumentRoot &quot;/var/web2&quot;
     ServerName example.com
-    ErrorLog &quot;logs/example.com-error_log&quot;
-    CustomLog &quot;logs/example.com-access_log&quot; common
-<span class="nt">&lt;/VirtualHost&gt;</span>
-</pre></div>
-
-
-<h3>2. 重启Apache</h3>
-<div class="highlight"><pre># service httpd restart
-</pre></div>
-
-
-<h3>3. 检查8080端口</h3>
-<div class="highlight"><pre># netstat -an | grep 8080
-tcp        0      0 0.0.0.0:8080                0.0.0.0:*                   LISTEN
-</pre></div>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+    ErrorLog ...</pre></div>
+                <a class="readmore" href="/apachekai-qi-8080duan-kou.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -350,18 +379,18 @@ tcp        0      0 0.0.0.0:8080                0.0.0.0:*                   LIST
 <h2>Visual formatting model recap</h2>
 <p><img alt="box model" src="images/box_model.png" /></p>
 <h2>Background images and image replacement</h2>
-<div class="highlight"><pre><span class="nf">#branding</span> <span class="p">{</span>
-    <span class="k">width</span><span class="o">:</span> <span class="m">700px</span><span class="p">;</span>
-    <span class="k">height</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
-    <span class="k">background</span><span class="o">:</span><span class="sx">url(/images/branding.gif)</span> <span class="k">no-repeat</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="nn">#branding</span> <span class="p">{</span>
+    <span class="nb">width</span><span class="o">:</span> <span class="m">700px</span><span class="p">;</span>
+    <span class="nb">height</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
+    <span class="nb">background</span><span class="o">:</span><span class="sx">url(/images/branding.gif)</span> <span class="nb">no-repeat</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
 
 <h2>Styling links</h2>
-<div class="highlight"><pre><span class="nt">a</span><span class="o">[</span><span class="nt">href</span><span class="o">^=</span><span class="s2">&quot;http:&quot;</span><span class="o">]</span> <span class="p">{</span>
-    <span class="k">background</span><span class="o">:</span> <span class="sx">url(images/externalLink.gif)</span> <span class="k">no-repeat</span> <span class="k">right</span> <span class="k">top</span><span class="p">;</span>
-    <span class="k">padding-right</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="nt">a</span><span class="o">[</span><span class="nt">href</span><span class="o">^=</span><span class="s2">&quot;http:&quot;</span><span class="o">]</span> <span class="p">{</span>
+    <span class="nb">background</span><span class="o">:</span> <span class="sx">url(images/externalLink.gif)</span> <span class="nb">no-repeat</span> <span class="nb">right</span> <span class="nb">top</span><span class="p">;</span>
+    <span class="nb">padding-right</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -393,7 +422,7 @@ tcp        0      0 0.0.0.0:8080                0.0.0.0:*                   LIST
 and closures.
 <img alt="javascript" src="images/javascript.png" /></p>
 <h2>Arming with testing and debugging</h2>
-<div class="highlight"><pre><span class="kd">function</span> <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">try</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
     <span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
@@ -487,36 +516,9 @@ and closures.
                 <a class="readmore" href="/principles-by-ray-dalio.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/configure-https.html" rel="bookmark"
-                           title="Permalink to Configure Https">Configure Https</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-10-10T16:35:59+08:00">
-                Published: 六 10 十月 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
-        </address>
-<p>In <a href="/category/https.html">Https</a>.</p>
-
-</footer><!-- /.post-info -->                <p>Https just means "http with ssl". In order to enable SSL, we need a
-certificate which is either self-signed or signed by an external
-Cerificate Authority. A self-signed certificate need to be imported
-when browsing. For easy-to-use purposes, use an external cerificate
-here. <a href="http://www.startssl.com/">http://www.startssl.com/</a> and
-<a href="https://buy.wosign.com/">https://buy ...</a></p>
-                <a class="readmore" href="/configure-https.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
-    Page 1 / 3
+    Page 1 / 4
         <a href="/index2.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->

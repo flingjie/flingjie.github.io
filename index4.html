@@ -2,7 +2,7 @@
 <html lang="ch">
 <head>
         <meta charset="utf-8" />
-        <title>Jie's Blog - Apache</title>
+        <title>Jie's Blog</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -23,62 +23,51 @@
                 </ul></nav>
         </header><!-- /#banner -->
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/apachekai-qi-8080duan-kou.html">Apache开启8080端口</a></h1>
+                <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="9">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/the-art-of-learning.html" rel="bookmark"
+                           title="Permalink to The Art of Learning">The Art of Learning</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-12-31T11:10:40+08:00">
-                Published: 四 31 十二月 2015
+        <abbr class="published" title="2012-12-06T23:20:30+08:00">
+                Published: 四 06 十二月 2012
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/flingjie.html">flingjie</a>
         </address>
-<p>In <a href="/category/apache.html">Apache</a>.</p>
+<p>In <a href="/category/note.html">Note</a>.</p>
 
-</footer><!-- /.post-info --><p>环境: 阿里云Centos+Apache+wordpress</p>
-<h3>1.Apache启用8080端口</h3>
-<p><strong>添加8080监听</strong></p>
-<div class="highlight"><pre><span></span># vim /usr/local/apache2/conf/httpd.confconf
-</pre></div>
-
-
-<p>在<code>Listen 80</code>后加入<code>Listen 8080</code></p>
-<div class="highlight"><pre><span></span>...
-Listen 80
-
-# add here
-Listen 8080
-</pre></div>
-
-
-<p><strong>配置服务器</strong></p>
-<div class="highlight"><pre><span></span># vim /usr/local/apache2/conf/extra/httpd-vhosts.conf 
-</pre></div>
-
-
-<p>添加网站:</p>
-<div class="highlight"><pre><span></span>...
-<span class="nt">&lt;VirtualHost</span> <span class="err">*:8080</span><span class="nt">&gt;</span>
-    # ServerAdmin webmaster@dummy-host2.example.com
-    DocumentRoot &quot;/var/web2&quot;
-    ServerName example.com
-    ErrorLog &quot;logs/example.com-error_log&quot;
-    CustomLog &quot;logs/example.com-access_log&quot; common
-<span class="nt">&lt;/VirtualHost&gt;</span>
-</pre></div>
-
-
-<h3>2. 重启Apache</h3>
-<div class="highlight"><pre><span></span># service httpd restart
-</pre></div>
-
-
-<h3>3. 检查8080端口</h3>
-<div class="highlight"><pre><span></span># netstat -an | grep 8080
-tcp        0      0 0.0.0.0:8080                0.0.0.0:*                   LISTEN
-</pre></div>                </article>
-            </aside><!-- /#featured -->
+</footer><!-- /.post-info -->                <p>追求卓越的关键在于，要坚持充满活力、长期的学习过程，不再满足于原地踏步、
+平平庸庸。</p>
+<ol>
+<li><em>划小圈</em>：自己的最佳状态。 　　 </li>
+<li><em>漩涡效应：</em> 在体育比赛当中我们经常会发现一个现象，原本势均力敌双方
+   中的一方在犯了一个错误之后往往连续失分，最后彻底溃败。大部分时候 双
+   方对峙的差距其实只是一线之隔，当情况变化之后我们可能丧失了优势，而
+   我们的内心往往并不能很好地接受这个变化。这个时候心理的微妙变化往往
+   会使得我们 的表现大失水准。我们往往不能理性地面对沉默资本，我们应该
+   尽可能地去冷静，去深呼吸，去接受这个变化。 　　</li>
+<li><em>整理理论、渐进理论：</em> 其实这是我们讨论的最欢乐的一部分。究竟是不是
+   有天才？所谓的天才究竟是天生为主还是后天为主？究竟该坚持结果主义 还
+   是过程主义？我个人觉得整体理论只是作为一个反例出现在书中，那种自以
+   为是的状态，自以为自己高过别人的心理是没办法持续突破自己的。只有坦
+   然地接纳自 己的强项和弱项，在每次比赛之后总结得失，才是真正可以内化
+   的修炼。更重要的是，这是我们个人与企业突破天花板的唯一方式。当你敢
+   于犯错，乐于失败的时 ...</li></ol>
+                <a class="readmore" href="/the-art-of-learning.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+<p class="paginator">
+        <a href="/index3.html">&laquo;</a>
+    Page 4 / 4
+</p>
+                </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
